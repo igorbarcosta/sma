@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publicar site"
+  short_description: "Publica SMA com auditoria e promoção segura"
+  default_prompt: "Use $publicar-site para validar e publicar o estado local já aprovado da disciplina."

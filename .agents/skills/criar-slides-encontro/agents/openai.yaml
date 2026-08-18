@@ -1,0 +1,4 @@
+interface:
+  display_name: "Criar slides do encontro"
+  short_description: "Deriva slides de um encontro aprovado"
+  default_prompt: "Use $criar-slides-encontro para derivar o deck de um encontro já validado."

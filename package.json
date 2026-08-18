@@ -1,0 +1,13 @@
+{
+  "name": "sma-disciplina",
+  "private": true,
+  "scripts": {
+    "site:build": "node scripts/build-site.mjs",
+    "slides:preview": "marp --server slides --theme-set slides/theme/sma.css",
+    "slides:render": "node slides/render.mjs",
+    "validate": "node scripts/validate.mjs"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.5.0"
+  }
+}

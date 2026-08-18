@@ -1,0 +1,101 @@
+/* Categorias semânticas iniciais. Manter o texto normal como estrutura principal. */
+.md-typeset :is(.admonition, details):is(
+  .question,
+  .concept,
+  .activity,
+  .trap,
+  .synthesis,
+  .takeaway
+) {
+  background-color: var(--semantic-background);
+  border-color: var(--semantic-color);
+}
+
+.md-typeset :is(.admonition, details).question {
+  --semantic-color: #5f7fa6;
+  --semantic-title: #315979;
+  --semantic-background: #f2f6fa;
+}
+
+.md-typeset :is(.admonition, details).concept {
+  --semantic-color: #f29900;
+  --semantic-title: #8a4b00;
+  --semantic-background: #fff3e0;
+}
+
+.md-typeset :is(.admonition, details).activity {
+  --semantic-color: #26855b;
+  --semantic-title: #146c43;
+  --semantic-background: #eaf6ef;
+}
+
+.md-typeset :is(.admonition, details).trap {
+  --semantic-color: #d64545;
+  --semantic-title: #a72d2d;
+  --semantic-background: #fcecec;
+}
+
+.md-typeset :is(.admonition, details).synthesis {
+  --semantic-color: #7258a8;
+  --semantic-title: #59408e;
+  --semantic-background: #f2eef9;
+}
+
+.md-typeset :is(.admonition, details).takeaway {
+  --semantic-color: #227f91;
+  --semantic-title: #176474;
+  --semantic-background: #eaf5f7;
+}
+
+.md-typeset :is(.question, .concept, .activity, .trap, .synthesis, .takeaway)
+  > :is(.admonition-title, summary) {
+  background-color: var(--semantic-background);
+  color: var(--semantic-title);
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).question {
+  --semantic-color: #83a9d2;
+  --semantic-title: #a9c7e8;
+  --semantic-background: #1b2836;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).concept {
+  --semantic-color: #f6ad3c;
+  --semantic-title: #ffc66d;
+  --semantic-background: #2d2417;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).activity {
+  --semantic-color: #57bb71;
+  --semantic-title: #81c995;
+  --semantic-background: #162b20;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).trap {
+  --semantic-color: #f28b82;
+  --semantic-title: #f28b82;
+  --semantic-background: #351d1b;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).synthesis {
+  --semantic-color: #b39ddb;
+  --semantic-title: #d7c5ff;
+  --semantic-background: #281f3d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(.admonition, details).takeaway {
+  --semantic-color: #66c5d7;
+  --semantic-title: #8dd6e4;
+  --semantic-background: #142b30;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :is(
+  .question,
+  .concept,
+  .activity,
+  .trap,
+  .synthesis,
+  .takeaway
+) {
+  color: #e3e8ef;
+}

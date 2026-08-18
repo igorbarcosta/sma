@@ -1,0 +1,4 @@
+interface:
+  display_name: "Registrar retrospectiva"
+  short_description: "Registra evidências de um encontro real"
+  default_prompt: "Use $registrar-retrospectiva para registrar evidências deste encontro sem transformá-las em regras permanentes."

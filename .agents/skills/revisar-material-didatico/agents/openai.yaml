@@ -1,0 +1,4 @@
+interface:
+  display_name: "Revisar material didático"
+  short_description: "Revisa materiais didáticos de SMA"
+  default_prompt: "Use $revisar-material-didatico para revisar este material sem alterar arquivos por padrão."

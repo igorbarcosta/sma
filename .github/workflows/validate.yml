@@ -1,0 +1,28 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - draft
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.3"
+          cache: pip
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: python -m pip install --requirement requirements.txt
+      - run: npm ci
+      - run: npm run validate

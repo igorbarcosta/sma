@@ -1,0 +1,4 @@
+interface:
+  display_name: "Criar encontro"
+  short_description: "Cria o roteiro de um encontro de SMA"
+  default_prompt: "Use $criar-encontro para criar um encontro a partir de um desenho pedagógico já aprovado."
