@@ -1,0 +1,10 @@
+{
+  "name": "SMA — Python 3.12",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "containerEnv": {
+    "UV_PYTHON_DOWNLOADS": "never"
+  },
+  "postCreateCommand": "uv sync --locked"
+}

@@ -23,6 +23,8 @@ Em caso de tensão, preservar a distinção: uma retrospectiva descreve o que ac
 - O site é construído com Zensical por meio dos scripts documentados no repositório.
 - A infraestrutura Marp usa tema compartilhado e renderização parametrizada por slug.
 - Os workflows em `.github/workflows/` validam o repositório e preparam a publicação no GitHub Pages.
+- O ambiente Python é gerenciado exclusivamente por `uv`, com `pyproject.toml` e `uv.lock` versionados.
+- Python 3.12 é a versão-base; ambiente local e GitHub Codespaces devem usar o mesmo projeto e os mesmos comandos.
 
 ## Fontes pedagógicas
 
@@ -67,7 +69,7 @@ Após alterações:
 4. confirmar que nenhum artefato ou decisão fora do escopo foi introduzido;
 5. informar arquivos alterados e validações executadas.
 
-Os comandos locais oficiais são `npm run site:build`, `npm run slides:preview`, `npm run slides:render -- <slug>` e `npm run validate`.
+Preparar o ambiente com `uv sync --locked` e diagnosticá-lo com `uv run python scripts/check_env.py`. Os demais comandos locais oficiais são `npm run site:build`, `npm run slides:preview`, `npm run slides:render -- <slug>` e `npm run validate`.
 
 ## Regra principal
 

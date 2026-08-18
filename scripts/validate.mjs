@@ -6,7 +6,12 @@ import { fileURLToPath } from "node:url";
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const requiredFiles = [
   "zensical.toml",
-  "requirements.txt",
+  "pyproject.toml",
+  "uv.lock",
+  ".python-version",
+  ".devcontainer/Dockerfile",
+  ".devcontainer/devcontainer.json",
+  "scripts/check_env.py",
   "docs/index.md",
   "docs/plano-de-ensino.md",
   "docs/cronograma.md",
@@ -81,6 +86,19 @@ if (errors.length > 0) {
   for (const error of errors) console.error(error);
   process.exit(1);
 }
+
+const environmentCheck = spawnSync(
+  "uv",
+  ["run", "--locked", "python", resolve(repositoryRoot, "scripts/check_env.py")],
+  { cwd: repositoryRoot, stdio: "inherit" },
+);
+
+if (environmentCheck.error) {
+  console.error(`Falha ao iniciar diagnóstico do ambiente: ${environmentCheck.error.message}`);
+  process.exit(1);
+}
+
+if (environmentCheck.status !== 0) process.exit(environmentCheck.status ?? 1);
 
 const build = spawnSync(process.execPath, [resolve(repositoryRoot, "scripts/build-site.mjs")], {
   cwd: repositoryRoot,

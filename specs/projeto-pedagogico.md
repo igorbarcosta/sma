@@ -11,7 +11,7 @@ Este documento registra a identidade, os resultados de aprendizagem, os princíp
 
 Fundamentos clássicos de Sistemas Multiagentes permanecem quando oferecem modelos conceituais duráveis para compreender problemas atuais. O curso não deve ser organizado por frameworks, bibliotecas, protocolos ou modismos tecnológicos. Tecnologias contemporâneas aparecem como instanciações substituíveis de conceitos mais duráveis.
 
-Python é a linguagem de referência, não o eixo curricular. Framework agentivo, biblioteca principal, gerenciador de ambiente e stack de implementação permanecem em aberto.
+Python é a linguagem de referência, não o eixo curricular. Framework agentivo, biblioteca principal e stack de implementação permanecem em aberto.
 
 O princípio transversal é:
 

@@ -9,7 +9,7 @@ Publicar somente mediante autorização explícita. Não usar esta skill para cr
 
 ## Auditar o trabalho
 
-1. Ler `AGENTS.md`, `.gitignore`, `package.json`, `requirements.txt` e os workflows.
+1. Ler `AGENTS.md`, `.gitignore`, `pyproject.toml`, `uv.lock`, `package.json` e os workflows.
 2. Executar `git status`, `git status --short --untracked-files=all` e `git diff --check`.
 3. Inspecionar alterações tracked, staged e não rastreadas e relacionar cada uma ao trabalho aprovado.
 4. Procurar temporários, caches, credenciais, segredos e arquivos inesperados.
@@ -18,7 +18,7 @@ Diante de item inesperado ou sem relação comprovada, parar. Não remover, desc
 
 ## Validar antes do staging
 
-1. Instalar dependências somente pelo lockfile e requisitos fixados, quando necessário.
+1. Sincronizar dependências somente com `uv sync --locked` e `npm ci`, quando necessário.
 2. Executar `npm run validate`.
 3. Corrigir apenas falhas técnicas evidentes pertencentes ao escopo aprovado; diante de decisão pedagógica ou estrutural, parar.
 4. Repetir status, diff e auditoria depois da validação.

@@ -1,19 +1,16 @@
-import { existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const localZensical = resolve(repositoryRoot, ".venv/bin/zensical");
-const executable = existsSync(localZensical) ? localZensical : "zensical";
-const result = spawnSync(executable, ["build", "--clean"], {
+const result = spawnSync("uv", ["run", "--locked", "zensical", "build", "--clean"], {
   cwd: repositoryRoot,
   stdio: "inherit",
 });
 
 if (result.error) {
-  console.error(`Não foi possível executar o Zensical: ${result.error.message}`);
-  console.error("Instale as dependências com: python3.12 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt");
+  console.error(`Não foi possível executar o ambiente com uv: ${result.error.message}`);
+  console.error("Instale uv 0.11.21 e execute: uv sync --locked");
   process.exit(1);
 }
 

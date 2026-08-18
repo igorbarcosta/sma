@@ -10,6 +10,7 @@ nav = [
   { "Projeto" = "projeto/index.md" },
   { "Materiais" = [
     { "Materiais" = "materiais/index.md" },
+    { "Ambiente de desenvolvimento" = "materiais/ambiente.md" },
     { "Referências" = "materiais/referencias.md" },
   ] },
 ]

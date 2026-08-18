@@ -93,12 +93,25 @@ Não inventar uma taxonomia visual extensa. Categorias adicionais, como Evidênc
 - Diante de excesso, revisar densidade e divisão antes de reduzir fonte.
 - Usar notas do apresentador para orientações de condução que não precisem permanecer projetadas.
 
+## Ambiente técnico de referência
+
+- Python 3.12 é a versão-base da disciplina.
+- `uv` gerencia o projeto, o ambiente virtual e as dependências.
+- `pyproject.toml` declara o projeto e suas dependências; `uv.lock` fixa a resolução reproduzível.
+- Clone local e GitHub Codespaces são ambientes oficialmente suportados.
+- Codespaces é uma alternativa para dificuldades de configuração local, não um requisito.
+- O ambiente local deve permanecer plenamente funcional e não depender de Codespaces.
+- Materiais que dependam de execução devem ser testados nos dois ambientes.
+- Os comandos usados nos materiais devem ser equivalentes localmente e no Codespaces.
+- Evitar dependências técnicas que não contribuam para os resultados de aprendizagem.
+- Não manter listas paralelas de dependências fora de `pyproject.toml` e `uv.lock`.
+
 ## Decisões ainda não tomadas
 
 Permanecem fora desta spec até decisão posterior:
 
 - framework agentivo ou biblioteca principal;
-- gerenciador de ambiente e stack de implementação;
+- stack de implementação além de Python e `uv`;
 - tema visual final e taxonomia adicional;
 - roteiros e composição detalhada de cada encontro;
 - desafios e domínio concreto do projeto integrador;
