@@ -3,7 +3,9 @@ name = "sma-disciplina"
 version = "0.1.0"
 description = "Ambiente técnico da disciplina de Sistemas Multiagentes / Agentic AI"
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = [
+  "google-genai==2.14.0",
+]
 
 [dependency-groups]
 dev = [

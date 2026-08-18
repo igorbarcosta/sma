@@ -106,12 +106,23 @@ Não inventar uma taxonomia visual extensa. Categorias adicionais, como Evidênc
 - Evitar dependências técnicas que não contribuam para os resultados de aprendizagem.
 - Não manter listas paralelas de dependências fora de `pyproject.toml` e `uv.lock`.
 
+### Provider didático padrão
+
+- A Gemini API é o provider didático padrão inicial dos encontros.
+- `gemini-3.5-flash-lite` é o modelo inicial de referência, registrado uma única vez na configuração operacional.
+- O acesso em Python usa o SDK atual `google-genai`; não usar o SDK legado `google-generativeai`.
+- Provider e modelo são escolhas operacionais substituíveis, não conceitos curriculares. Os materiais conceituais não devem depender semanticamente do Gemini.
+- Exemplos futuros devem evitar espalhar configuração específica do provider, sem criar interface genérica, adapter, factory ou framework próprio de abstração.
+- Cada estudante usa sua própria `GEMINI_API_KEY`. Não haverá credencial compartilhada da turma nem segredo incluído no repositório.
+- Outros providers podem ser usados posteriormente para comparação ou no projeto integrador.
+- Exercícios didáticos e materiais oficiais devem usar dados sintéticos ou controlados, nunca dados pessoais, institucionais, confidenciais ou sensíveis.
+
 ## Decisões ainda não tomadas
 
 Permanecem fora desta spec até decisão posterior:
 
-- framework agentivo ou biblioteca principal;
-- stack de implementação além de Python e `uv`;
+- framework agentivo ou biblioteca principal além do SDK de acesso ao provider;
+- stack de implementação além de Python, `uv` e do acesso operacional à Gemini API;
 - tema visual final e taxonomia adicional;
 - roteiros e composição detalhada de cada encontro;
 - desafios e domínio concreto do projeto integrador;

@@ -25,6 +25,7 @@ Em caso de tensão, preservar a distinção: uma retrospectiva descreve o que ac
 - Os workflows em `.github/workflows/` validam o repositório e preparam a publicação no GitHub Pages.
 - O ambiente Python é gerenciado exclusivamente por `uv`, com `pyproject.toml` e `uv.lock` versionados.
 - Python 3.12 é a versão-base; ambiente local e GitHub Codespaces devem usar o mesmo projeto e os mesmos comandos.
+- O provider didático padrão inicial é Gemini, com configuração operacional centralizada em `config/llm.toml` e credencial pessoal em `GEMINI_API_KEY`.
 
 ## Fontes pedagógicas
 
@@ -42,6 +43,7 @@ O roteiro pedagógico validado precede os slides. Slides são instrumentos de co
 - Priorizar soluções simples, explícitas e fáceis de manter.
 - Usar Markdown e recursos nativos das ferramentas quando possível.
 - Não adicionar dependências, frameworks ou infraestrutura sem necessidade e decisão explícita.
+- Nunca registrar, imprimir ou compartilhar credenciais; arquivos `.env` locais não são versionados.
 - Não inventar datas, prazos, bibliografia, avaliações, regras acadêmicas ou decisões curriculares.
 - Não escolher framework agentivo, biblioteca principal, gerenciador de ambiente ou stack sem decisão explícita.
 - Implementar decisões pedagógicas já aprovadas, mas não tomar decisões pedagógicas importantes no lugar do professor.
