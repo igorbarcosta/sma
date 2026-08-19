@@ -31,6 +31,33 @@ description: Revisa materiais didáticos existentes de SMA quanto a correção, 
 - no projeto, baseline, comparação, avaliação, redesign e possibilidade legítima de rejeitar múltiplos agentes;
 - em slides, narrativa, legibilidade a distância, densidade, contraste, overflow e fidelidade ao roteiro.
 
+### Páginas públicas
+
+**Autonomia de estudo**
+
+- o estudante consegue aprender ou revisar sem a presença do professor;
+- os conceitos estão realmente explicados, e não apenas nomeados;
+- exemplos e respostas possuem análise suficiente para tornar o raciocínio reconstruível.
+
+**Storytelling**
+
+- existe uma pergunta ou tensão que move a narrativa;
+- as seções se encadeiam causalmente e o conceito aparece porque surgiu uma necessidade;
+- não há rupturas entre blocos nem sensação de coleção de tópicos;
+- exemplos carregam a narrativa, em vez de funcionar apenas como ilustrações soltas.
+
+**Separação de funções**
+
+- a página funciona como material de estudo, não como roteiro interno;
+- metadados pedagógicos internos não estão expostos sem necessidade;
+- a página não é uma duplicação dos slides.
+
+### Slides
+
+- o arco narrativo aprovado permanece visível e cada frame ajuda a movê-lo;
+- casos, perguntas, revelações, contrastes e progressão visual sustentam o storytelling;
+- o deck preserva ritmo e legibilidade, sem absorver as explicações detalhadas da página pública.
+
 Não propor mudança apenas por preferência editorial nem inventar decisões ausentes.
 
 ## Relatar

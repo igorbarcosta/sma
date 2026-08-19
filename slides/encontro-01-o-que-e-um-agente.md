@@ -76,6 +76,76 @@ Registre no quadro os critérios que realmente surgirem. Não valide requisitos 
 -->
 
 ---
+<!-- _class: trap -->
+
+## O termostato cria um problema
+
+Não conversa · não usa LLM · não aprende
+
+Mas percebe a temperatura, decide entre possibilidades e age para manter uma condição desejada.
+
+> IA moderna pode ser nosso critério?
+
+<!--
+Use o termostato como contraexemplo, sem encerrar sua classificação. Faça emergir que inteligência generativa não pode ser o critério principal.
+-->
+
+---
+<!-- _class: question -->
+
+# Então uma LLM é um agente?
+
+<!--
+Espere. Colete duas ou três justificativas antes de mostrar as arquiteturas. Não aceite apenas sim/não: peça a propriedade decisiva.
+-->
+
+---
+
+## A LLM cria o problema oposto
+
+<div class="columns">
+<div>
+
+```text
+entrada
+  ↓
+ LLM
+  ↓
+saída
+```
+
+</div>
+<div>
+
+Quem controla:
+
+quando chamar? · o que acontece depois?
+
+se haverá outra ação? · quais efeitos ocorrerão?
+
+</div>
+</div>
+
+<!--
+Mostre que linguagem sofisticada não atribui automaticamente à LLM a responsabilidade pela continuidade ou pelos efeitos da interação.
+-->
+
+---
+<!-- _class: takeaway -->
+
+## O contraste
+
+Uma LLM pode fazer parte do mecanismo de **decisão** de um agente.
+
+<div class="statement">Uma LLM não é automaticamente um agente.</div>
+
+Um agente não precisa utilizar IA generativa.
+
+<!--
+Faça a transição: os dois contraexemplos exigem um modelo que localize responsabilidades na arquitetura.
+-->
+
+---
 <!-- _class: question -->
 
 ## O que nosso modelo precisa explicar?
@@ -156,81 +226,6 @@ Agência admite **graus**, **fronteiras** e classificações diferentes quando a
 
 <!--
 Erro comum: trocar o critério superficial por uma checklist igualmente superficial. Peça um exemplo em que o grau de autonomia seja discutível.
--->
-
----
-<!-- _class: question -->
-
-# Então uma LLM é um agente?
-
-<!--
-Espere. Colete duas ou três justificativas antes de mostrar as arquiteturas. Não aceite apenas sim/não: peça a propriedade decisiva.
--->
-
----
-
-## Compare as arquiteturas
-
-<div class="columns">
-<div>
-
-```text
-entrada
-  ↓
- LLM
-  ↓
-saída
-```
-
-</div>
-<div>
-
-```text
-objetivo
-  ↓
-perceber
-  ↓
-decidir ↔ consequência
-  ↓             ↑
-agir ───────────┘
-```
-
-</div>
-</div>
-
-<!--
-Pergunte onde estão ambiente, ação e nova decisão em cada caso. A ausência deles na chamada simples é a descoberta pretendida.
--->
-
----
-<!-- _class: takeaway -->
-
-## A distinção
-
-Uma LLM pode fazer parte do mecanismo de **decisão** de um agente.
-
-<div class="statement">Uma LLM não é automaticamente um agente.</div>
-
-Um agente não precisa utilizar IA generativa.
-
-<!--
-Formalize somente após a comparação. Faça a transição: agora vamos observar as responsabilidades acontecendo em uma simulação.
--->
-
----
-<!-- _class: trap -->
-
-## Qual parece mais agentivo?
-
-<div class="columns">
-<div class="card"><strong>Sistema X</strong><br>Uma LLM muito poderosa gera uma descrição textual.</div>
-<div class="card"><strong>Sistema Y</strong><br>Um termostato antigo percebe temperatura e age autonomamente.</div>
-</div>
-
-> IA moderna = agente?
-
-<!--
-Voto rápido por mãos ou cartões. Peça justificativas arquiteturais. Provoque: cinquenta etapas e muitas APIs tornam um workflow necessariamente mais agentivo?
 -->
 
 ---

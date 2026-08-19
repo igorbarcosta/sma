@@ -35,6 +35,7 @@ Ao final da disciplina, o estudante deverá ser capaz de:
 
 - Partir de problemas e necessidades antes da formalização.
 - Usar predominantemente a sequência `problema → previsão/investigação → formalização → aplicação → transferência`.
+- Construir uma narrativa conceitual em que problemas, tensões, investigações, formalizações, exemplos e transferências se encadeiem causalmente. Storytelling dá sentido à progressão conceitual, não é ornamentação nem fórmula rígida.
 - Usar aprendizagem ativa guiada sem transformar toda aula em atividade.
 - Usar worked examples quando a novidade cognitiva for alta.
 - Aplicar scaffolding inicialmente e removê-lo progressivamente.

@@ -68,11 +68,20 @@ O site conterá conteúdo e orientações permanentes. O Google Classroom será 
 
 Desafios e projeto possuirão páginas permanentes, mas seus casos concretos só devem ser criados quando solicitados e pedagogicamente definidos.
 
+### Funções dos materiais
+
+A página pública de cada encontro é material de aprendizagem e revisão autônoma. Ela deve ensinar pelo texto e permitir que o estudante reconstrua o raciocínio, compreenda os conceitos e estude posteriormente, inclusive quando não tiver participado de toda a experiência presencial. Não deve ser transcrição dos slides, roteiro do professor, lista de atividades nem resumo telegráfico.
+
+Os slides são instrumentos de condução da experiência presencial. Preservam o arco narrativo por meio de casos, perguntas, contrastes, revelações e progressão visual, enquanto as explicações detalhadas permanecem na página pública.
+
+O planejamento pedagógico sustenta ambos e contém intenção, operação cognitiva, evidência observável, timing, concepções esperadas e decisões de condução. Esses elementos não devem aparecer mecanicamente no texto do estudante: devem ser traduzidos em perguntas, orientações e explicações naturais. Essa separação é de função e não exige, por si só, um novo artefato público.
+
 ## Construção dos encontros
 
 O roteiro pedagógico é a fonte do encontro. Antes dos slides, devem estar definidos e validados, na medida pertinente:
 
 - problema ou necessidade que inicia a trajetória;
+- narrativa conceitual causal que conecta tensões, investigações, formalizações, exemplos e transferências;
 - resultados atendidos e dependências;
 - operação cognitiva pretendida em cada atividade;
 - evidência observável dessa operação;
@@ -81,7 +90,7 @@ O roteiro pedagógico é a fonte do encontro. Antes dos slides, devem estar defi
 - núcleo necessário e possíveis aprofundamentos elásticos;
 - relação com avaliações, desafios ou projeto, quando houver.
 
-O encontro não precisa usar todos esses elementos como seções públicas. Detalhes internos de planejamento só devem aparecer ao estudante quando ajudarem a compreender, executar ou avaliar o próprio trabalho.
+O encontro não precisa usar todos esses elementos como seções públicas. Detalhes internos de planejamento só devem aparecer ao estudante quando ajudarem a compreender, executar ou avaliar o próprio trabalho, sem rótulos como `Operação cognitiva` ou `Evidência`.
 
 ## Slides
 

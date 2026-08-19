@@ -15,12 +15,13 @@ description: Deriva um deck Marp e suas distribuições oficiais de um encontro 
 
 ## Derivar o deck
 
-1. Reconstruir a experiência do encontro, preservando problema, previsões, investigações, formalizações, aplicações e transferências pertinentes.
-2. Trabalhar uma ideia principal por frame.
-3. Representar atividades sem revelar antecipadamente suas respostas.
-4. Usar apenas categorias visuais genéricas já aprovadas e somente quando tiverem função semântica real.
-5. Usar notas do apresentador para orientações que não precisem permanecer projetadas.
-6. Criar `slides/encontro-XX-<slug>.md` sem alterar a intenção pedagógica do roteiro.
+1. Reconstruir a experiência do encontro e preservar o arco narrativo aprovado na página ou no planejamento, com problema, tensões, previsões, investigações, formalizações, aplicações e transferências pertinentes.
+2. Fazer cada frame mover a história conceitual por casos, perguntas, revelações, contrastes ou progressão visual; evitar sequências de tópicos independentes.
+3. Trabalhar uma ideia principal por frame e manter na página pública as explicações detalhadas.
+4. Representar atividades sem revelar antecipadamente suas respostas.
+5. Usar apenas categorias visuais genéricas já aprovadas e somente quando tiverem função semântica real.
+6. Usar notas do apresentador para orientações que não precisem permanecer projetadas.
+7. Criar `slides/encontro-XX-<slug>.md` sem alterar a intenção pedagógica do roteiro.
 
 Não criar uma taxonomia visual nova, escolher tecnologias ou transformar seções mecanicamente em slides.
 
