@@ -162,6 +162,17 @@ consultar_pedido(381)
 
 Essa é uma ação porque consulta algo no ambiente. A decisão foi consultar antes de abrir uma solicitação. Até aqui, o sistema transformou uma lacuna — “não sei o status” — em uma busca por percepção relevante.
 
+Uma consulta pode parecer intuitivamente uma percepção, mas arquiteturalmente podemos decompor o episódio:
+
+```text
+decisão de consultar
+→ ação de consulta
+→ resposta do ambiente
+→ nova percepção
+```
+
+> A chamada da ferramenta é uma ação. O resultado devolvido pela ferramenta passa a fazer parte da próxima percepção do sistema.
+
 ### 3. O ambiente responde
 
 ```text
@@ -215,13 +226,38 @@ Suponha que a trajetória do pedido tenha sido programada com condições fixas.
 
 Autonomia admite graus. O objetivo da análise não é substituir “usa LLM” por “tem `if/else`” como novo atalho, mas explicar a distribuição de responsabilidades. Essa questão abrirá um problema ainda mais importante: mesmo quando podemos construir um sistema agentivo, isso é necessário?
 
+## Duas lentes para a palavra “agente”
+
+O termo `agente` é usado com granularidades diferentes. Em vez de escolher uma única definição como certa, precisamos reconhecer duas lentes úteis para os problemas desta disciplina.
+
+Na tradição de **Sistemas Multiagentes**, uma lente mais ampla permite analisar como agente um sistema situado em um ambiente, que percebe, age, possui um objetivo ou condição orientadora e opera com algum grau de autonomia. Por essa lente, sistemas simples e determinísticos podem apresentar agência. O termostato é justamente um bom caso de fronteira.
+
+Na engenharia contemporânea de **Agentic AI**, especialmente em sistemas baseados em LLMs, costuma ser útil distinguir fluxos cuja trajetória é definida externamente de sistemas que decidem em tempo de execução como prosseguir. Nessa lente, duas perguntas ganham destaque:
+
+> **Quem controla a trajetória?**
+
+> **Quem escolhe o próximo passo diante do estado observado?**
+
+As lentes não se anulam: uma ajuda a reconhecer propriedades gerais de agência; a outra ajuda a decidir como organizar o controle de uma arquitetura contemporânea.
+
+> **Nesta disciplina precisaremos das duas lentes.**
+
 ## LLM, workflow e agente
 
-Esses termos descrevem coisas diferentes e não formam uma taxonomia absoluta.
+Esses termos não ocupam o mesmo eixo. Uma LLM é uma capacidade ou componente possível. `Workflow` e `agente` descrevem principalmente como o controle da execução está organizado.
 
-| Arquitetura | Exemplo concreto | Responsabilidade decisiva |
+```text
+LLM
+= capacidade / componente possível
+
+workflow ↔ agente
+= organização do controle da execução
+```
+
+Podemos ter workflow sem LLM, workflow com LLM, agente com LLM ou agente sem LLM. Na comparação entre as formas de controle:
+
+| Organização | Exemplo concreto | Responsabilidade decisiva |
 |---|---|---|
-| LLM em chamada isolada | recebe um texto, redige um resumo e devolve a saída | outro componente controla quando chamar e o que fazer depois |
 | Workflow | valida um formulário, consulta um cadastro e envia um e-mail em ordem definida | o fluxo determina previamente o próximo passo ou ramo |
 | Agente | recebe um objetivo, observa a situação e escolhe entre ações permitidas | o sistema possui algum espaço de decisão orientado pelo objetivo |
 
