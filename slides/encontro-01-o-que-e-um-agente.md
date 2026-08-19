@@ -12,24 +12,18 @@ description: Sistemas Multiagentes / Agentic AI
 
 Encontro 01 · Sistemas Multiagentes / Agentic AI
 
-<!--
-Abra sem definição. Diga apenas que a turma precisará tomar posição e sustentá-la.
--->
+<!-- Abra sem definição. A turma precisará tomar posição e sustentá-la. -->
 
 ---
 
-## Quatro sistemas estranhos
+## Quatro sistemas
 
 <div class="cards">
 <div class="card"><strong>A · Termostato</strong><br>Percebe a temperatura e liga ou desliga o aquecimento.</div>
-<div class="card"><strong>B · Chamada à LLM</strong><br>Recebe uma pergunta, gera uma resposta e termina.</div>
+<div class="card"><strong>B · LLM isolada</strong><br>Recebe uma pergunta, produz uma resposta e termina.</div>
 <div class="card"><strong>C · Workflow</strong><br>Valida, consulta e envia e-mail por regras predefinidas.</div>
 <div class="card"><strong>D · Orientado por objetivo</strong><br>Observa, decide, age e pode decidir novamente.</div>
 </div>
-
-<!--
-Leia somente o necessário. Não explique nem classifique os casos.
--->
 
 ---
 <!-- _class: activity -->
@@ -38,73 +32,113 @@ Leia somente o necessário. Não explique nem classifique os casos.
 
 Para cada sistema, registre:
 
-1. **agente**, **não agente** ou **depende / não tenho certeza**;
-2. ao menos **uma propriedade** usada na decisão.
+1. **agente**, **não agente** ou **depende**;
+2. uma propriedade que sustentou sua decisão.
 
 <div class="statement">Primeiro: 3 minutos em silêncio.</div>
 
-<!--
-Garanta uma resposta individual antes de qualquer fala coletiva. Circule e observe quais critérios aparecem.
--->
-
----
-<!-- _class: activity -->
-
-## Tente convencer seu colega
-
-Compare as quatro classificações.
-
-Se alguém mudar de opinião, registrem:
-
-> **Qual argumento provocou a mudança?**
-
-<!--
-Discussão em dupla por 4–5 minutos. Peça que preservem a resposta inicial para comparação posterior.
--->
+<!-- Preserve a resposta individual para comparação posterior. -->
 
 ---
 <!-- _class: question -->
 
-## Que critérios usamos sem perceber?
+# Qual critério você está usando?
 
-IA · conversa · inteligência · autonomia · decisão
+<!-- Colete critérios antes de projetar a lista seguinte. -->
 
-percepção · ação · aprendizagem · objetivo · memória
+---
 
-<!--
-Registre no quadro os critérios que realmente surgirem. Não valide requisitos ainda. Pergunte por contradições entre as classificações e os critérios.
--->
+## Nossas primeiras pistas
+
+usa IA · conversa · aprende
+
+decide · age sozinho · tem objetivo
+
+inteligência · memória · modernidade
+
+---
+<!-- _class: question -->
+
+# Algum desses critérios resolve sozinho?
+
+<!-- Espere previsões e peça um contraexemplo. -->
+
+---
+
+## Uma possível análise
+
+<div class="columns">
+<div class="card"><strong>Se linguagem fosse requisito...</strong><br>o termostato nunca apresentaria agência.</div>
+<div class="card"><strong>Se usar IA bastasse...</strong><br>toda chamada isolada a uma LLM seria agente.</div>
+</div>
+
+<div class="statement">Precisamos explicar responsabilidades, não aparência.</div>
 
 ---
 <!-- _class: trap -->
 
 ## O termostato cria um problema
 
-Não conversa · não usa LLM · não aprende
+```text
+temperatura = 28 °C
+        ↓
+desejada = 23 °C
+```
 
-Mas percebe a temperatura, decide entre possibilidades e age para manter uma condição desejada.
+O sistema recebe uma condição do ambiente.
 
-> IA moderna pode ser nosso critério?
+---
 
-<!--
-Use o termostato como contraexemplo, sem encerrar sua classificação. Faça emergir que inteligência generativa não pode ser o critério principal.
--->
+## A pequena história
+
+```text
+percebe 28 °C
+→ compara com 23 °C
+→ decide ligar o resfriamento
+→ age sobre o ambiente
+→ percebe novamente
+```
 
 ---
 <!-- _class: question -->
 
-# Então uma LLM é um agente?
+# Ele usa uma LLM?
 
-<!--
-Espere. Colete duas ou três justificativas antes de mostrar as arquiteturas. Não aceite apenas sim/não: peça a propriedade decisiva.
--->
+---
+<!-- _class: takeaway -->
+
+# Não.
+
+O comportamento pode ser simples e determinístico.
+
+---
+<!-- _class: question -->
+
+# Ele conversa?
 
 ---
 
-## A LLM cria o problema oposto
+## Também não.
 
-<div class="columns">
-<div>
+Mesmo assim, encontramos:
+
+**percepção · condição desejada · decisão · ação**
+
+---
+<!-- _class: takeaway -->
+
+## Primeira ruptura
+
+> **Talvez “usar IA” não seja o que define agência.**
+
+O termostato pode ser um agente simples ou um controlador, conforme o modelo adotado.
+
+Mas IA generativa já não serve como fronteira geral.
+
+---
+<!-- _class: trap -->
+
+## A LLM cria o problema oposto
 
 ```text
 entrada
@@ -114,49 +148,129 @@ entrada
 saída
 ```
 
-</div>
-<div>
-
-Quem controla:
-
-quando chamar? · o que acontece depois?
-
-se haverá outra ação? · quais efeitos ocorrerão?
-
-</div>
-</div>
-
-<!--
-Mostre que linguagem sofisticada não atribui automaticamente à LLM a responsabilidade pela continuidade ou pelos efeitos da interação.
--->
-
----
-<!-- _class: takeaway -->
-
-## O contraste
-
-Uma LLM pode fazer parte do mecanismo de **decisão** de um agente.
-
-<div class="statement">Uma LLM não é automaticamente um agente.</div>
-
-Um agente não precisa utilizar IA generativa.
-
-<!--
-Faça a transição: os dois contraexemplos exigem um modelo que localize responsabilidades na arquitetura.
--->
+Linguagem sofisticada. Uma transformação isolada.
 
 ---
 <!-- _class: question -->
 
-## O que nosso modelo precisa explicar?
+# Quem decide o que acontece depois?
 
-> Por que sistemas parecidos receberam classificações diferentes?
+---
 
-> Por que sistemas tão diferentes receberam a mesma classificação?
+## Normalmente, a aplicação externa
 
-<!--
-Use o conflito criado pela turma para justificar a formalização. Não apresente o modelo como mera definição para memorizar.
--->
+- decide **quando chamar**;
+- escolhe **o que enviar**;
+- determina **o que fazer com a resposta**;
+- controla **se haverá próxima etapa**.
+
+---
+<!-- _class: takeaway -->
+
+## Segunda ruptura
+
+> **Capacidade cognitiva e agência não são a mesma coisa.**
+
+Uma LLM pode participar da decisão de um agente sem controlar a interação completa.
+
+---
+<!-- _class: question -->
+
+## Termostato × LLM isolada
+
+> Qual apresenta mais propriedades de agência nesta arquitetura?
+
+<!-- Vote antes da análise seguinte. -->
+
+---
+
+## Uma possível análise
+
+<div class="columns">
+<div class="card"><strong>Termostato</strong><br>Percebe, decide, age e observa novamente.</div>
+<div class="card"><strong>LLM isolada</strong><br>Transforma uma entrada; outro componente controla a continuidade.</div>
+</div>
+
+<div class="statement">Tecnologia mais sofisticada pode ter menos responsabilidades agentivas.</div>
+
+---
+<!-- _class: question -->
+
+# Precisamos de um modelo melhor
+
+Não “quão inteligente parece?”, mas:
+
+> **qual papel exerce na arquitetura?**
+
+---
+<!-- _class: concept -->
+
+## Ambiente
+
+Aquilo com que o sistema interage e que pode afetar seu comportamento.
+
+<div class="statement">Termostato: espaço, temperatura e equipamento de climatização.</div>
+
+---
+<!-- _class: concept -->
+
+## Percepção
+
+Informação do ambiente disponível para orientar o comportamento.
+
+```text
+condição do espaço → sensor → 28 °C disponíveis ao sistema
+```
+
+Perceber não exige um sensor físico: uma resposta de API também pode ser percepção.
+
+---
+<!-- _class: concept -->
+
+## Objetivo
+
+A direção que permite avaliar quais ações fazem sentido.
+
+```text
+manter a temperatura em 23 °C
+```
+
+Não precisa ser inventado pelo sistema nem escrito em linguagem natural.
+
+---
+<!-- _class: concept -->
+
+## Decisão
+
+Seleção do que fazer diante das informações disponíveis.
+
+```text
+28 °C observados → ligar ou não ligar?
+```
+
+Pode usar regras, modelos estatísticos, LLMs ou outros mecanismos.
+
+---
+<!-- _class: concept -->
+
+## Ação
+
+Intervenção ou consulta que atravessa a fronteira com o ambiente.
+
+```text
+ligar resfriamento · consultar pedido · abrir solicitação
+```
+
+---
+<!-- _class: concept -->
+
+## Autonomia
+
+Quanto da seleção e continuidade das ações pertence ao sistema.
+
+> Dentro dos limites definidos, **quem determina o próximo passo?**
+
+Autonomia não significa liberdade ilimitada.
 
 ---
 <!-- _class: concept -->
@@ -164,219 +278,622 @@ Use o conflito criado pela turma para justificar a formalização. Não apresent
 ## Um sistema situado
 
 ```text
-                ambiente
-                   │
-               percepção
-                   ▼
-                 agente
-            estado / decisão
-                   │
-                  ação
-                   ▼
-                ambiente
+                     ambiente
+              percepção │ ▲ consequência
+                        ▼ │
+                    ┌─────────┐
+        objetivo ──▶│ agente  │
+                    │ decisão │
+                    └─────────┘
+                        │ ação
+                        ▼
+                     ambiente
 ```
-
-<!--
-Construa o desenho aos poucos no quadro. Comece pelo ambiente; pergunte o que atravessa cada fronteira antes de nomear percepção e ação.
--->
-
----
-<!-- _class: concept -->
-
-## O ciclo muda o que vem depois
-
-```text
-perceber → decidir → agir
-   ↑                   │
-   └── consequência ───┘
-```
-
-O comportamento é orientado por um **objetivo** e possui algum grau de **autonomia**.
-
-<!--
-Explique em até 5 minutos. Destaque que uma ação altera ou consulta o ambiente e produz nova informação para a próxima decisão.
--->
-
----
-<!-- _class: concept -->
-
-## Dimensões para analisar
-
-<div class="cards">
-<div class="card"><strong>Ambiente</strong><br>Com o que o sistema interage?</div>
-<div class="card"><strong>Percepção</strong><br>Que informação ele obtém?</div>
-<div class="card"><strong>Ação</strong><br>O que ele pode alterar?</div>
-<div class="card"><strong>Objetivo</strong><br>O que orienta o comportamento?</div>
-<div class="card"><strong>Decisão</strong><br>Que escolha ocorre?</div>
-<div class="card"><strong>Autonomia</strong><br>Que escolhas pertencem ao sistema?</div>
-</div>
-
-<!--
-Use como linguagem de análise, não como seis caixas obrigatórias. Evite aprofundar estado, memória ou planejamento.
--->
 
 ---
 <!-- _class: trap -->
 
-## Não é uma fórmula
+## O modelo não é uma checklist
 
 > “Se tiver X + Y + Z, então é agente.”
 
-Agência admite **graus**, **fronteiras** e classificações diferentes quando a argumentação é tecnicamente consistente.
+Agência admite **graus**, **fronteiras** e classificações diferentes quando a justificativa é arquiteturalmente consistente.
 
-<!--
-Erro comum: trocar o critério superficial por uma checklist igualmente superficial. Peça um exemplo em que o grau de autonomia seja discutível.
--->
+---
+
+## Uma transformação pode terminar aqui
+
+```text
+entrada → transformação → saída
+```
+
+Isso pode ser suficiente para o problema.
+
+---
+<!-- _class: concept -->
+
+## Agência como ciclo
+
+```text
+perceber
+   ↓
+decidir
+   ↓
+agir
+   ↓
+ambiente muda
+   ↓
+perceber novamente
+```
+
+---
+<!-- _class: question -->
+
+# O que muda quando existe esse retorno?
+
+---
+
+## A consequência alimenta a próxima decisão
+
+A ação pode:
+
+**falhar · revelar informação · mudar a situação**
+
+O sistema não deve presumir que o ambiente permaneceu igual.
 
 ---
 <!-- _class: activity -->
 
-## Simulação: pedido 381
+## Exemplo trabalhado · pedido 381
 
 **Objetivo**
 
 > Verifique o pedido 381. Se estiver atrasado, abra uma solicitação de atendimento.
 
-**Ações disponíveis**
+---
+<!-- _class: question -->
+
+# O que o sistema sabe neste momento?
+
+---
+
+## O que sabe — e o que não sabe
+
+<div class="columns">
+<div class="card"><strong>Sabe</strong><br>qual pedido investigar e quando agir.</div>
+<div class="card"><strong>Não sabe</strong><br>se o pedido está atrasado.</div>
+</div>
+
+Abrir a solicitação agora seria agir sem a informação necessária.
+
+---
+
+## Ações disponíveis
 
 ```text
 consultar_pedido(id)
+
 abrir_solicitacao(id, motivo)
 ```
 
-<!--
-Escolha uma pessoa para representar o agente; o professor ou cartões representam o ambiente. Não fale em tool calling ou SDK.
--->
-
 ---
-<!-- _class: activity -->
+<!-- _class: question -->
 
-## O agente escolhe uma ação
+## O sistema escolhe
 
 ```text
 consultar_pedido(381)
 ```
 
-**Ambiente responde:**
+> Percepção, decisão ou ação?
+
+---
+
+## Há decisão e ação
+
+**Decisão:** consultar antes de abrir.
+
+**Ação:** atravessar a fronteira e consultar o ambiente.
+
+```text
+“não sei o status” → buscar percepção relevante
+```
+
+---
+<!-- _class: question -->
+
+## O ambiente responde
 
 ```text
 status = atrasado
 ```
 
-> O que acabou de acontecer?
-
-<!--
-Pause antes da resposta do ambiente. Pergunte por que consultar veio antes de abrir a solicitação. Depois revele o status.
--->
+> O que mudou?
 
 ---
-<!-- _class: activity -->
 
-## O novo estado muda a decisão
+## Uma nova percepção ficou disponível
+
+Antes: o sistema conhecia apenas o objetivo.
+
+Agora: sabe que a condição para agir foi satisfeita.
+
+<div class="statement">A resposta do ambiente muda a próxima decisão.</div>
+
+---
+
+## A segunda decisão
 
 ```text
 abrir_solicitacao(381, "pedido atrasado")
 ```
 
-**Ambiente responde:**
+A nova percepção sustenta a escolha; a ação altera o ambiente.
+
+---
+<!-- _class: question -->
+
+## O ambiente confirma
 
 ```text
 solicitação criada
 ```
 
-<!--
-Peça que a turma indique qual informação sustentou a segunda escolha. Destaque a observação da consequência sem antecipar mecanismos internos.
--->
+> Por que essa confirmação importa?
 
 ---
-<!-- _class: question -->
 
-## Onde ocorreu cada responsabilidade?
+## A confirmação também é percepção
 
-Percepção? · Decisão? · Ação?
+Ela informa que a ação produziu o efeito esperado.
 
-Ambiente? · Objetivo? · Autonomia?
-
-> E se todas as etapas fossem determinadas previamente por `if/else`?
-
-<!--
-Construa a resposta coletivamente. A presença de if/else não encerra a discussão: diferencie decisão arquitetural, liberdade de seleção e regras fixas.
--->
-
----
-<!-- _class: question -->
-
-## Agente, workflow ou depende?
-
-> Um assistente recebe um pedido. Uma regra fixa determina qual API será chamada. A LLM apenas transforma o resultado em linguagem natural.
-
-<!--
-Peer Instruction. Exija voto individual antes da conversa. Opções: agente; workflow; depende. Não sinalize uma resposta preferida.
--->
-
----
-<!-- _class: activity -->
-
-## Vote → discuta → vote novamente
-
-1. Escolha uma classificação.
-2. Registre a propriedade decisiva.
-3. Tente convencer um colega.
-4. Vote novamente.
-
-> Sua justificativa ficou melhor, mesmo se seu voto não mudou?
-
-<!--
-Reserve 6–8 minutos. Compare justificativas, não apenas a distribuição dos votos. Evidência desejada: vocabulário arquitetural mais preciso no segundo voto.
--->
-
----
-<!-- _class: activity -->
-
-## Desafio de fronteira
-
-Cada grupo recebe um sistema:
-
-termostato · robô aspirador · chatbot simples
-
-workflow de aprovação · LLM com capacidade externa
-
-agente de compras orientado por objetivo
-
-<!--
-Terceiro tempo. Distribua um caso por grupo. Trabalho de análise: 12 minutos. Não peça pesquisa externa; as descrições podem ser complementadas oralmente.
--->
-
----
-<!-- _class: activity -->
-
-## Prepare uma defesa curta
-
-> Nosso sistema apresenta estas propriedades de agência e não apresenta estas outras. Por isso, nossa classificação é...
-
-**A turma poderá contestar.**
-
-<!--
-Apresentações de até 90 segundos. Limite a uma contestação curta por grupo para evitar formato de seminário.
--->
-
----
-<!-- _class: question -->
-
-## Coloque a defesa à prova
-
-Isso é decisão ou condição programada? · Onde está o ambiente?
-
-O sistema poderia não agir? · Aprender é requisito?
-
-Sem a LLM, ainda é agente? · Onde termina a autonomia?
-
-<!--
-Escolha perguntas conforme a fragilidade real de cada defesa. Não use todas com todos os grupos.
--->
+```text
+se retornasse “serviço indisponível”
+→ a situação exigiria outra decisão
+```
 
 ---
 <!-- _class: synthesis -->
+
+## Reconstruindo o pedido 381
+
+```text
+objetivo
+→ decisão: consultar
+→ ação: consultar_pedido(381)
+→ percepção: status = atrasado
+→ decisão: abrir solicitação
+→ ação: abrir_solicitacao(...)
+→ percepção: solicitação criada
+```
+
+---
+<!-- _class: question -->
+
+# Onde exatamente estava a decisão?
+
+---
+
+## Em duas seleções sustentadas pelo que se sabia
+
+1. consultar, porque faltava o status;
+2. abrir, porque o ambiente informou atraso.
+
+> A saída final não mostra sozinha como essas responsabilidades foram distribuídas.
+
+---
+<!-- _class: question -->
+
+# E se fosse tudo `if/else`?
+
+Isso eliminaria automaticamente a agência?
+
+---
+
+## Software determinístico também percebe e age
+
+O termostato já mostrou isso.
+
+```text
+se temperatura > desejada
+→ ligar resfriamento
+```
+
+Uma regra é um mecanismo possível de decisão.
+
+---
+
+## Mas regras podem fixar toda a trajetória
+
+```text
+consultar
+→ se atrasado, abrir
+→ senão, encerrar
+```
+
+Nesse caso, o espaço de escolha pode ser muito limitado.
+
+---
+<!-- _class: trap -->
+
+## Armadilha
+
+> **`if/else` não decide sozinho se algo é agente.**
+
+Precisamos observar:
+
+**onde há escolha · quem controla o próximo passo · quanto já foi predeterminado**
+
+---
+
+## LLM isolada
+
+```text
+texto → LLM → resumo
+```
+
+Outro componente controla quando chamar e o que fazer depois.
+
+---
+
+## Workflow
+
+```text
+validar → consultar → enviar
+```
+
+O fluxo determina previamente o próximo passo ou ramo.
+
+---
+
+## Agente
+
+```text
+objetivo + percepção
+→ escolher entre ações permitidas
+→ observar consequência
+```
+
+Existe algum espaço de decisão orientado pelo objetivo.
+
+---
+<!-- _class: takeaway -->
+
+## Não é uma taxonomia absoluta
+
+<div class="cards">
+<div class="card"><strong>LLM</strong><br>capacidade possível</div>
+<div class="card"><strong>Workflow</strong><br>trajetória especificada</div>
+<div class="card"><strong>Agente</strong><br>espaço de decisão orientado</div>
+</div>
+
+<div class="statement">A presença de uma LLM não determina a arquitetura.</div>
+
+---
+<!-- _class: lead -->
+
+# O que não é requisito?
+
+Vamos desmontar alguns atalhos.
+
+---
+<!-- _class: question -->
+
+# Precisa usar IA generativa?
+
+---
+<!-- _class: takeaway -->
+
+## Não.
+
+O termostato já mostrou percepção, objetivo, decisão e ação sem IA generativa.
+
+Uma LLM é um mecanismo possível, não um requisito.
+
+---
+<!-- _class: question -->
+
+# Precisa conversar?
+
+---
+
+## Não.
+
+Robôs, controladores e sistemas de software podem perceber e agir sem interface conversacional.
+
+Um chatbot pode conversar sem controlar outra ação além de produzir texto.
+
+---
+<!-- _class: question -->
+
+# Precisa aprender?
+
+---
+
+## Não.
+
+Regras fixas podem sustentar interação autônoma com o ambiente.
+
+Aprender pode mudar a decisão ao longo do tempo; não é condição necessária para agência.
+
+---
+<!-- _class: question -->
+
+# Precisa ter memória complexa?
+
+---
+
+## Não.
+
+A informação relevante precisa estar disponível para a decisão corrente.
+
+Isso não exige uma arquitetura sofisticada de memória.
+
+---
+<!-- _class: question -->
+
+# Precisa ser sofisticado?
+
+---
+
+## Não.
+
+Um sistema simples pode assumir responsabilidades agentivas estreitas.
+
+Um sistema sofisticado pode executar apenas uma transformação comandada externamente.
+
+---
+<!-- _class: question -->
+
+# Precisa ser imprevisível?
+
+---
+
+## Não.
+
+Determinismo não elimina percepção e ação.
+
+Aleatoriedade não cria objetivo nem autonomia.
+
+---
+<!-- _class: activity -->
+
+## Casos de fronteira
+
+Para cada caso:
+
+1. classifique;
+2. identifique a propriedade decisiva;
+3. aceite `depende` somente se explicar **do que depende**.
+
+---
+<!-- _class: question -->
+
+## Chatbot simples
+
+```text
+mensagem → resposta
+```
+
+Isso basta para chamá-lo de agente?
+
+---
+
+## Depende da arquitetura
+
+Só responder aproxima o caso de uma transformação isolada.
+
+Se puder escolher entre responder, pedir informação e agir externamente, a análise muda.
+
+---
+<!-- _class: question -->
+
+## Robô aspirador
+
+Percebe obstáculos, muda de direção e continua limpando.
+
+> Onde está sua autonomia?
+
+---
+
+## Uma possível análise
+
+Sensores percebem o espaço; mover e aspirar são ações; limpar orienta o comportamento.
+
+Mesmo com regras, o próximo movimento depende do ambiente percebido.
+
+---
+<!-- _class: question -->
+
+## Workflow de aprovação
+
+Encaminha ao gestor, espera a resposta e, se aprovada, envia ao financeiro.
+
+> Percepção e ação bastam?
+
+---
+
+## O ponto decisivo
+
+O fluxo completo e seus ramos podem já determinar cada etapa.
+
+Há percepção e ação, mas pouca autonomia se o sistema apenas executa a trajetória especificada.
+
+---
+<!-- _class: question -->
+
+## LLM com capacidade externa
+
+Pode consultar um cadastro e enviar mensagens.
+
+> Ter capacidades basta?
+
+---
+
+## Precisamos saber quem seleciona a ação
+
+Se outro programa sempre manda consultar e enviar, há um workflow.
+
+Se o sistema escolhe capacidades conforme objetivo e percepções, assume mais responsabilidade.
+
+---
+<!-- _class: question -->
+
+## API escolhida por regra fixa
+
+A regra escolhe a API; a LLM apenas transforma o resultado em linguagem.
+
+> Agente, workflow ou depende?
+
+---
+
+## Uma classificação bem sustentada
+
+**Workflow com componente de LLM:** a regra escolhe a ação e a LLM não controla o próximo passo.
+
+Outro rótulo exige explicar qual autonomia pertence ao sistema completo.
+
+---
+<!-- _class: takeaway -->
+
+## Casos de fronteira não exigem unanimidade
+
+> **Classificações podem divergir; a qualidade da justificativa é o que importa.**
+
+“Tem IA”, “conversa” ou “usa API” não bastam.
+
+---
+<!-- _class: lead -->
+
+# Verifique sua compreensão
+
+Agora o modelo precisa funcionar em casos novos.
+
+---
+<!-- _class: question -->
+
+## 1 · Irrigação da estufa
+
+Lê a umidade a cada dez minutos. Abaixo do limite, abre a válvula por dois minutos e volta a medir.
+
+> Localize ambiente, percepção, objetivo, decisão, ação e autonomia.
+
+---
+
+## Análise · irrigação
+
+**Ambiente:** solo, água e válvula · **Percepção:** umidade
+
+**Objetivo:** manter o limite · **Decisão:** abrir ou não
+
+**Ação:** abrir a válvula · **Autonomia:** repetir o ciclo sem nova ordem externa
+
+---
+<!-- _class: question -->
+
+## 2 · Gerador de parecer
+
+Um clique envia um documento à LLM, recebe o parecer e o exibe. Nada mais é consultado ou executado.
+
+> Por que a presença da LLM não basta para concluir “agente”?
+
+---
+
+## Análise · parecer
+
+O clique inicia uma transformação isolada.
+
+A arquitetura não atribui ao modelo a escolha de quando agir, o que consultar depois ou como produzir outros efeitos.
+
+---
+<!-- _class: question -->
+
+## 3 · Monitor de estoque
+
+Recebe “reduzir faltas”, mas uma regra fixa a ordem das consultas e calcula a compra. A LLM apenas redige a justificativa.
+
+> Quem possui a responsabilidade decisiva?
+
+---
+
+## Análise · estoque
+
+A regra externa controla a trajetória e calcula a ação.
+
+A LLM não passa a decidir porque redige a justificativa.
+
+<div class="statement">Workflow é uma classificação bem sustentada.</div>
+
+---
+<!-- _class: question -->
+
+## 4 · Mesma saída, arquiteturas diferentes
+
+Um fluxo fixo e um sistema orientado por objetivo abrem a mesma solicitação.
+
+> Por que a saída final não prova o mesmo grau de agência?
+
+---
+
+## Análise · mesma saída
+
+O primeiro recebe o caminho completo.
+
+O segundo seleciona o próximo passo entre possibilidades, conforme objetivo e percepções.
+
+> A saída apaga as decisões que produziram o resultado.
+
+---
+<!-- _class: synthesis -->
+
+## Começamos com uma intuição
+
+> “Agente parece ser algo inteligente.”
+
+---
+<!-- _class: synthesis -->
+
+## O termostato quebrou essa intuição
+
+Sem conversar ou usar IA generativa, apresentou:
+
+**percepção · condição desejada · decisão · ação · retorno**
+
+---
+<!-- _class: synthesis -->
+
+## A LLM mostrou o problema oposto
+
+Linguagem sofisticada não atribui automaticamente controle sobre:
+
+**continuidade · ações · consequências**
+
+---
+<!-- _class: synthesis -->
+
+## Então mudamos a pergunta
+
+Não:
+
+> quão inteligente parece?
+
+Mas:
+
+> **qual papel exerce na arquitetura?**
+
+---
+<!-- _class: synthesis -->
+
+## Nosso modelo de análise
+
+```text
+ambiente → percepção → decisão → ação → consequência
+                ↑         ↑
+             objetivo  autonomia
+```
+
+---
+<!-- _class: takeaway -->
 
 ## Três ideias para levar
 
@@ -384,11 +901,7 @@ Escolha perguntas conforme a fragilidade real de cada defesa. Não use todas com
 
 **Um agente não precisa usar IA generativa.**
 
-**Responsabilidades, decisões e graus de autonomia importam mais que o rótulo isolado.**
-
-<!--
-Retome duas classificações do início e peça que a turma as reformule com o novo modelo. Isso fornece a evidência final de mudança de critério.
--->
+**Responsabilidades e autonomia importam mais que o rótulo isolado.**
 
 ---
 <!-- _class: activity -->
@@ -397,23 +910,41 @@ Retome duas classificações do início e peça que a turma as reformule com o n
 
 Escolha **um sistema real** possivelmente agentivo.
 
-Analise ambiente · percepção · ação · objetivo · decisão · autonomia.
-
-Classifique e justifique.
+Pode ser assistente, navegador, robô, recomendador, bot, automação, sistema industrial ou jogo.
 
 **Formativo · sem nota · laboratório OU casa · durante a semana**
 
-<!--
-Mostre a página do encontro para as sete perguntas completas. Reforce que não é Desafio nem avaliação e que será retomado brevemente no próximo encontro.
--->
+Conclua antes do próximo encontro; o resultado será retomado no Encontro 02.
+
+---
+<!-- _class: activity -->
+
+## Analise o sistema
+
+1. Qual é o ambiente? O que percebe?
+2. O que pode fazer? Qual objetivo o orienta?
+3. Que decisões pertencem ao sistema?
+4. Onde está a autonomia?
+5. Você o considera agente? **Justifique.**
+
+---
+<!-- _class: activity -->
+
+## Quando a arquitetura não estiver visível
+
+Declare suas hipóteses:
+
+> “Se o sistema seleciona a ação, então...”
+
+> “Se uma regra fixa controla o fluxo, então...”
+
+Termine perguntando: **mesmo que seja agente, precisava ser?**
 
 ---
 <!-- _class: lead -->
 
 # Ele precisava ser um agente?
 
-Próximo encontro: **quando vale a pena tornar um sistema agentivo?**
+Encontro 02 · **Quando vale a pena tornar um sistema agentivo?**
 
-<!--
-Encerre com a dúvida, sem respondê-la. Essa pergunta deve orientar a transferência no trabalho autônomo.
--->
+<!-- Encerre com a dúvida; não antecipe a resposta do próximo encontro. -->

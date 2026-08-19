@@ -56,7 +56,12 @@ description: Revisa materiais didáticos existentes de SMA quanto a correção, 
 
 - o arco narrativo aprovado permanece visível e cada frame ajuda a movê-lo;
 - casos, perguntas, revelações, contrastes e progressão visual sustentam o storytelling;
-- o deck preserva ritmo e legibilidade, sem absorver as explicações detalhadas da página pública.
+- todas as ideias, exemplos, contraexemplos, comparações, perguntas, análises, exemplos trabalhados, sínteses e transições conceitualmente importantes da página estão representados;
+- perguntas relevantes recebem posteriormente resposta ou análise no próprio deck, sem revelação prematura e sem depender das notas;
+- o deck pode ser compreendido posteriormente pelo estudante em HTML ou PDF;
+- o minimalismo resulta de baixa densidade por frame, não de omissões para reduzir a quantidade de slides;
+- o deck preserva ritmo e legibilidade sem copiar mecanicamente as explicações detalhadas da página pública;
+- detectar explicitamente o caso de um deck visualmente bonito, mas conceitualmente incompleto.
 
 Não propor mudança apenas por preferência editorial nem inventar decisões ausentes.
 

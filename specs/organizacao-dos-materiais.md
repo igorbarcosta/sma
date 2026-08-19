@@ -70,9 +70,11 @@ Desafios e projeto possuirão páginas permanentes, mas seus casos concretos só
 
 ### Funções dos materiais
 
-A página pública de cada encontro é material de aprendizagem e revisão autônoma. Ela deve ensinar pelo texto e permitir que o estudante reconstrua o raciocínio, compreenda os conceitos e estude posteriormente, inclusive quando não tiver participado de toda a experiência presencial. Não deve ser transcrição dos slides, roteiro do professor, lista de atividades nem resumo telegráfico.
+A página pública de cada encontro é material completo de aprendizagem e revisão autônoma, desenvolvido em texto narrativo. Ela deve ensinar pelo texto e permitir que o estudante reconstrua o raciocínio, compreenda os conceitos e estude posteriormente, inclusive quando não tiver participado de toda a experiência presencial. Não deve ser transcrição dos slides, roteiro do professor, lista de atividades nem resumo telegráfico.
 
-Os slides são instrumentos de condução da experiência presencial. Preservam o arco narrativo por meio de casos, perguntas, contrastes, revelações e progressão visual, enquanto as explicações detalhadas permanecem na página pública.
+Os slides são instrumentos de condução da experiência presencial e devem cobrir o mesmo percurso conceitual e narrativo da página em linguagem visual e projetável. Todas as ideias centrais, exemplos, contraexemplos, comparações, perguntas, análises, exemplos trabalhados, sínteses intermediárias e transições relevantes devem estar representados no deck. Completude conceitual entre página e slides não implica equivalência textual: uma explicação desenvolvida em parágrafos pode tornar-se uma sequência como `pergunta → diagrama → exemplo → resposta → takeaway`.
+
+Perguntas conceitualmente relevantes usadas para conduzir investigação devem ter respostas, análises ou possíveis interpretações posteriormente disponíveis no próprio deck, sem revelação prematura. As notas do apresentador preservam timing e condução, não conteúdo conceitual necessário para estudo posterior em HTML ou PDF.
 
 O planejamento pedagógico sustenta ambos e contém intenção, operação cognitiva, evidência observável, timing, concepções esperadas e decisões de condução. Esses elementos não devem aparecer mecanicamente no texto do estudante: devem ser traduzidos em perguntas, orientações e explicações naturais. Essa separação é de função e não exige, por si só, um novo artefato público.
 
@@ -121,6 +123,7 @@ Não inventar uma taxonomia visual extensa. Categorias adicionais, como Evidênc
 - Evitar paredes de texto, listas extensas e destaques sem função semântica.
 - Em slides, trabalhar uma ideia principal por frame e preservar legibilidade a distância.
 - Diante de excesso, revisar densidade e divisão antes de reduzir fonte.
+- Obter minimalismo reduzindo a densidade por frame e usando mais frames quando necessário, nunca omitindo partes conceitualmente importantes apenas para reduzir o deck.
 - Usar notas do apresentador para orientações de condução que não precisem permanecer projetadas.
 
 ## Ambiente técnico de referência
