@@ -44,6 +44,8 @@ A disciplina será uma sequência de **14 experiências semanais**, não uma div
 
 A composição muda de acordo com o problema em estudo e com a autonomia desenvolvida pela turma. Por isso, os quatro tempos não seguem uma distribuição rígida: explicação, investigação, discussão, prática e trabalho autônomo são recursos articulados em uma mesma trajetória de aprendizagem.
 
+O trabalho autônomo orientado é formativo e sem nota por padrão, possui uma operação cognitiva explícita e não se confunde com Desafio, Avaliação ou Projeto. Pode ser realizado no laboratório ou em casa, sem diferença pedagógica entre os locais, normalmente ao longo da semana e antes do encontro seguinte, que procurará retomar brevemente o resultado produzido. Quando uma atividade compuser a nota, será identificada explicitamente como instrumento avaliativo. Essa organização pedagógica não define nem altera regras institucionais de frequência, que permanecem uma questão administrativa separada.
+
 O site reúne conteúdos e orientações permanentes. Datas, entregas, comunicação e notas serão tratadas no Google Classroom; a visão atual do semestre ficará no [Cronograma](cronograma.md).
 
 ## Metodologia

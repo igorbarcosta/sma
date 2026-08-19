@@ -5,7 +5,10 @@ nav = [
   { "Início" = "index.md" },
   { "Plano de Ensino" = "plano-de-ensino.md" },
   { "Cronograma" = "cronograma.md" },
-  { "Encontros" = "encontros/index.md" },
+  { "Encontros" = [
+    { "Encontros" = "encontros/index.md" },
+    { "01 — O que é um agente?" = "encontros/encontro-01-o-que-e-um-agente.md" },
+  ] },
   { "Desafios" = "desafios/index.md" },
   { "Projeto" = "projeto/index.md" },
   { "Materiais" = [

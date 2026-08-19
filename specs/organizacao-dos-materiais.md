@@ -15,6 +15,27 @@ Como referência flexível:
 
 Essa referência não é um template rígido. Não adotar a estrutura fixa `Aula → Laboratório` nem criar séries independentes de aulas e laboratórios.
 
+### Trabalho autônomo orientado
+
+O trabalho autônomo orientado faz parte da organização regular da disciplina. É formativo e sem nota por padrão e não deve ser confundido com Desafio, Avaliação ou Projeto. Se uma atividade compuser a nota, ela deverá ser explicitamente apresentada como um desses instrumentos avaliativos, de acordo com a arquitetura de avaliação da disciplina.
+
+Ele pode ser realizado no laboratório ou em casa, conforme a preferência e a necessidade do estudante, sem diferença pedagógica entre os locais. Normalmente, será desenvolvido ao longo da semana e concluído antes do encontro seguinte. Essa flexibilidade não deve ser descrita como um “4º tempo remoto”, pois não estabelece modalidade nem regra de frequência e não transforma os quatro tempos em uma divisão rígida.
+
+Cada trabalho autônomo deve declarar a operação cognitiva pretendida — por exemplo, consolidar, transferir, investigar, comparar, formular hipótese ou preparar o próximo encontro — e evitar tarefas genéricas apresentadas apenas como dever de casa. Quando houver trabalho autônomo, o encontro seguinte deve procurar reutilizar brevemente e de modo intencional o resultado produzido. A duração deve ser realista, compatível com a carga semanal e sem criar sobrecarga.
+
+A continuidade semanal pode ser representada conceitualmente como:
+
+```text
+encontro
+→ problema / investigação / formalização / prática
+→ trabalho autônomo orientado
+→ laboratório OU casa
+→ realização ao longo da semana
+→ retomada breve no encontro seguinte
+```
+
+Essa sequência descreve a organização pedagógica do trabalho. Ela não define nem altera automaticamente regras institucionais de frequência. Questões administrativas de presença permanecem separadas e só devem ser registradas quando houver decisão institucional específica.
+
 ## Unidade pública
 
 Os materiais públicos dos encontros usarão futuramente:
