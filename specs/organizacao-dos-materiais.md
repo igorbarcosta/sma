@@ -72,15 +72,17 @@ Desafios e projeto possuirão páginas permanentes, mas seus casos concretos só
 
 A página pública de cada encontro é material completo de aprendizagem e revisão autônoma, desenvolvido em texto narrativo. Ela deve ensinar pelo texto e permitir que o estudante reconstrua o raciocínio, compreenda os conceitos e estude posteriormente, inclusive quando não tiver participado de toda a experiência presencial. Não deve ser transcrição dos slides, roteiro do professor, lista de atividades nem resumo telegráfico.
 
-Os slides são instrumentos de condução da experiência presencial e devem cobrir o mesmo percurso conceitual e narrativo da página em linguagem visual e projetável. Todas as ideias centrais, exemplos, contraexemplos, comparações, perguntas, análises, exemplos trabalhados, sínteses intermediárias e transições relevantes devem estar representados no deck. Completude conceitual entre página e slides não implica equivalência textual: uma explicação desenvolvida em parágrafos pode tornar-se uma sequência como `pergunta → diagrama → exemplo → resposta → takeaway`.
+Encontros podem possuir artefatos executáveis em `praticas/encontro-XX/`. Quando a experiência depender de observar e modificar um sistema, o artefato executável pode ocupar o centro do encontro, com a página pública funcionando como interface de condução e material de estudo. Roteiro público e prática podem constituir juntos o material completo.
 
-Perguntas conceitualmente relevantes usadas para conduzir investigação devem ter respostas, análises ou possíveis interpretações posteriormente disponíveis no próprio deck, sem revelação prematura. As notas do apresentador preservam timing e condução, não conteúdo conceitual necessário para estudo posterior em HTML ou PDF.
+Slides não são obrigatórios. Devem ser criados quando agregarem valor específico que roteiro e artefatos não entregam bem. Quando existirem, são instrumentos de condução da experiência presencial e devem cobrir o mesmo percurso conceitual e narrativo da página em linguagem visual e projetável. Todas as ideias centrais, exemplos, contraexemplos, comparações, perguntas, análises, exemplos trabalhados, sínteses intermediárias e transições relevantes devem estar representados no deck. Completude conceitual entre página e slides não implica equivalência textual: uma explicação desenvolvida em parágrafos pode tornar-se uma sequência como `pergunta → diagrama → exemplo → resposta → takeaway`.
+
+Quando houver deck, perguntas conceitualmente relevantes usadas para conduzir investigação devem ter respostas, análises ou possíveis interpretações posteriormente disponíveis no próprio deck, sem revelação prematura. As notas do apresentador preservam timing e condução, não conteúdo conceitual necessário para estudo posterior em HTML ou PDF.
 
 O planejamento pedagógico sustenta ambos e contém intenção, operação cognitiva, evidência observável, timing, concepções esperadas e decisões de condução. Esses elementos não devem aparecer mecanicamente no texto do estudante: devem ser traduzidos em perguntas, orientações e explicações naturais. Essa separação é de função e não exige, por si só, um novo artefato público.
 
 ## Construção dos encontros
 
-O roteiro pedagógico é a fonte do encontro. Antes dos slides, devem estar definidos e validados, na medida pertinente:
+O roteiro pedagógico é a fonte do encontro. Antes de produzir materiais derivados, inclusive slides quando forem necessários, devem estar definidos e validados, na medida pertinente:
 
 - problema ou necessidade que inicia a trajetória;
 - narrativa conceitual causal que conecta tensões, investigações, formalizações, exemplos e transferências;

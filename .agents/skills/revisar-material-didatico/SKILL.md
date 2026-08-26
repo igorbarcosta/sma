@@ -23,6 +23,9 @@ description: Revisa materiais didáticos existentes de SMA quanto a correção, 
 - coerência com o princípio da solução mais simples;
 - causalidade entre problema, investigação, formalização, aplicação e transferência;
 - adequação entre operação cognitiva declarada e atividade proposta;
+- integração entre teoria e prática em ciclos curtos, com prática cedo quando apropriado ao conteúdo e formalização motivada pelo que foi executado ou observado;
+- variedade de operações cognitivas e ausência de repetição disfarçada do mesmo padrão de participação e raciocínio em exemplos sucessivos;
+- preferência por um sistema ou problema que evolui ao longo do encontro quando isso reduz fragmentação;
 - existência de evidência observável da aprendizagem pretendida;
 - uso apropriado de worked examples, scaffolding, Peer Instruction, recuperação e interleaving;
 - clareza, legibilidade, escopo e dependências;

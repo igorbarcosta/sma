@@ -8,6 +8,7 @@ nav = [
   { "Encontros" = [
     { "Encontros" = "encontros/index.md" },
     { "01 — O que é um agente?" = "encontros/encontro-01-o-que-e-um-agente.md" },
+    { "02 — Quando tornar um sistema agentivo?" = "encontros/encontro-02-quando-vale-a-pena-tornar-um-sistema-agentivo.md" },
   ] },
   { "Desafios" = "desafios/index.md" },
   { "Projeto" = "projeto/index.md" },

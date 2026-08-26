@@ -1,0 +1,27 @@
+[
+  {
+    "id": "internet-urgente",
+    "mensagem": "O Wi-Fi morreu no laboratório e minha apresentação começa daqui a pouco.",
+    "estado": {"categoria": "internet", "urgente": true, "local": "laboratório"}
+  },
+  {
+    "id": "sala-fria",
+    "mensagem": "A sala virou a Sibéria.",
+    "estado": {"categoria": "climatizacao", "urgente": false, "local": "sala"}
+  },
+  {
+    "id": "computador-ferias",
+    "mensagem": "Meu computador decidiu tirar férias.",
+    "estado": {"categoria": "computador", "urgente": false, "local": null}
+  },
+  {
+    "id": "mochila-perdida",
+    "mensagem": "Esqueci minha mochila no laboratório.",
+    "estado": {"categoria": "objeto_perdido", "urgente": false, "local": "laboratório"}
+  },
+  {
+    "id": "ajuda-incerta",
+    "mensagem": "Preciso de ajuda, mas nem sei qual setor resolve isso.",
+    "estado": {"categoria": "outro", "urgente": false, "local": null}
+  }
+]

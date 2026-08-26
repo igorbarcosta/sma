@@ -7,3 +7,4 @@ Cada encontro terá uma página permanente no formato `encontro-XX-assunto`, sem
 ## Encontros disponíveis
 
 1. [O que é um agente?](encontro-01-o-que-e-um-agente.md)
+2. [Quando vale a pena tornar um sistema agentivo?](encontro-02-quando-vale-a-pena-tornar-um-sistema-agentivo.md)
