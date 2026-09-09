@@ -46,8 +46,8 @@ Ao final da disciplina, o estudante deverá ser capaz de:
 - Buscar feedback sobre o raciocínio ou modelo mental que produziu o erro.
 - Declarar, no planejamento de atividades, a operação cognitiva que se deseja provocar.
 - Considerar repetição útil quando muda a operação cognitiva, como previsão, comparação, diagnóstico, explicação, aplicação ou transferência.
-- Construir primeiro o roteiro pedagógico e derivar os slides depois.
-- Tratar slides como instrumento de condução do encontro, não como resumo de apostila.
+- Construir, a partir do roteiro pedagógico, um roteiro público autoguiado e uma prática correspondente; eles constituem os materiais centrais do encontro.
+- Não criar slides para novos encontros. O roteiro e a prática precisam permitir estudo, execução e retomada sem mediação do professor.
 - Usar IA como ferramenta que exige julgamento, verificação e responsabilidade do estudante.
 
 Aprendizagem ativa é um recurso a serviço do objetivo, não um ritual. Explicação conduzida, investigação, discussão, prática, estúdio e trabalho autônomo podem coexistir conforme o problema e a autonomia já desenvolvida.

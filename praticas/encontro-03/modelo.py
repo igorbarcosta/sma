@@ -77,6 +77,25 @@ def _decisao_simulada(estado: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def validar_decisao(decisao: dict[str, Any]) -> dict[str, Any]:
+    """Recusa propostas que não pertencem ao contrato do controlador."""
+    if not isinstance(decisao, dict):
+        raise ValueError("A decisão precisa ser um objeto estruturado.")
+    if decisao.get("acao") not in ACOES_CONVERSACIONAIS:
+        raise ValueError("Ação recusada: não pertence ao conjunto conversacional permitido.")
+    if not isinstance(decisao.get("mensagem"), str):
+        raise ValueError("A mensagem da decisão deve ser texto.")
+    if not isinstance(decisao.get("concluiu"), bool):
+        raise ValueError("A decisão deve declarar se o ciclo terminou.")
+    if not isinstance(decisao.get("motivo"), str):
+        raise ValueError("O motivo da decisão deve ser texto.")
+    if decisao["acao"] == "perguntar_local" and decisao["concluiu"]:
+        raise ValueError("Perguntar o local não pode encerrar o ciclo.")
+    if decisao["acao"] == "orientar_e_encerrar" and not decisao["concluiu"]:
+        raise ValueError("Orientar neste exemplo precisa encerrar o ciclo.")
+    return decisao
+
+
 def decidir(objetivo: str, observacao: str, estado: dict[str, Any], offline: bool) -> dict[str, Any]:
     """Produz uma decisão limitada a duas ações conversacionais."""
     print("MODO OFFLINE — DECISÃO SIMULADA" if offline else "MODO ONLINE — GEMINI")
@@ -92,16 +111,4 @@ def decidir(objetivo: str, observacao: str, estado: dict[str, Any], offline: boo
             "qualquer ação externa. Se o local estiver ausente, pergunte por ele; se estiver "
             "presente, oriente e encerre."
         )
-    if decisao.get("acao") not in ACOES_CONVERSACIONAIS:
-        raise ValueError("Ação recusada: não pertence ao conjunto conversacional permitido.")
-    if not isinstance(decisao.get("mensagem"), str):
-        raise ValueError("A mensagem da decisão deve ser texto.")
-    if not isinstance(decisao.get("concluiu"), bool):
-        raise ValueError("A decisão deve declarar se o ciclo terminou.")
-    if not isinstance(decisao.get("motivo"), str):
-        raise ValueError("O motivo da decisão deve ser texto.")
-    if decisao["acao"] == "perguntar_local" and decisao["concluiu"]:
-        raise ValueError("Perguntar o local não pode encerrar o ciclo.")
-    if decisao["acao"] == "orientar_e_encerrar" and not decisao["concluiu"]:
-        raise ValueError("Orientar neste exemplo precisa encerrar o ciclo.")
-    return decisao
+    return validar_decisao(decisao)

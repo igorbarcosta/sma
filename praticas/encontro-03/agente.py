@@ -48,7 +48,7 @@ def executar_ciclo(
         print(f"AGENTE: {decisao['mensagem']}")
 
         if decisao["concluiu"]:
-            print("\nPARADA: o componente de decisão declarou que o objetivo conversacional foi atendido.")
+            print("\nPARADA: o controlador aceitou a conclusão declarada pelo componente de decisão.")
             return
 
         if decisao["acao"] == "perguntar_local":

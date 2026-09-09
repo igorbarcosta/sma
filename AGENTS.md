@@ -18,10 +18,10 @@ Em caso de tensão, preservar a distinção: uma retrospectiva descreve o que ac
 - Encontros usarão futuramente `docs/encontros/encontro-XX-<slug>.md`.
 - Desafios práticos, projeto integrador e materiais terão seções públicas próprias.
 - O Google Classroom será usado para entregas, prazos, comunicação e notas; não duplicar esses dados operacionais no conteúdo permanente sem necessidade.
-- Fontes Marp ficarão em `slides/*.md`; HTML e PDF oficiais derivados ficarão em `slides/rendered/` e serão versionados.
+- O acervo histórico de fontes Marp em `slides/` e suas distribuições versionadas será preservado; não criar novos slides nem depender deles nos encontros futuros.
 - A saída local gerada do site ficará em `site/` e nunca deverá ser editada manualmente.
 - O site é construído com Zensical por meio dos scripts documentados no repositório.
-- A infraestrutura Marp usa tema compartilhado e renderização parametrizada por slug.
+- A infraestrutura Marp existente atende apenas ao acervo histórico; não é parte do fluxo de criação de novos encontros.
 - Os workflows em `.github/workflows/` validam o repositório e preparam a publicação no GitHub Pages.
 - O ambiente Python é gerenciado exclusivamente por `uv`, com `pyproject.toml` e `uv.lock` versionados.
 - Python 3.12 é a versão-base; ambiente local e GitHub Codespaces devem usar o mesmo projeto e os mesmos comandos.
@@ -32,11 +32,11 @@ Em caso de tensão, preservar a distinção: uma retrospectiva descreve o que ac
 Antes de criar ou revisar conteúdo, consultar as specs pertinentes:
 
 - `specs/projeto-pedagogico.md`: identidade, resultados, princípios e macroprogressão;
-- `specs/organizacao-dos-materiais.md`: organização temporal, encontros, páginas e slides;
+- `specs/organizacao-dos-materiais.md`: organização temporal, encontros, roteiros e práticas;
 - `specs/avaliacao-e-uso-de-ia.md`: instrumentos, pesos e política de IA;
 - `specs/retrospectivas.md`: registro e uso de evidências da oferta.
 
-O roteiro pedagógico validado precede os slides. Slides são instrumentos de condução do encontro, não resumos de apostila.
+O roteiro pedagógico validado orienta um roteiro público autoguiado e sua prática correspondente. Não criar slides para novos encontros.
 
 ## Princípios operacionais
 
@@ -71,7 +71,7 @@ Após alterações:
 4. confirmar que nenhum artefato ou decisão fora do escopo foi introduzido;
 5. informar arquivos alterados e validações executadas.
 
-Preparar o ambiente com `uv sync --locked` e diagnosticá-lo com `uv run python scripts/check_env.py`. Os demais comandos locais oficiais são `npm run site:build`, `npm run slides:preview`, `npm run slides:render -- <slug>` e `npm run validate`.
+Preparar o ambiente com `uv sync --locked` e diagnosticá-lo com `uv run python scripts/check_env.py`. Os comandos locais oficiais para materiais atuais são `npm run site:build` e `npm run validate`; comandos Marp existem apenas para manutenção excepcional do acervo histórico.
 
 ## Regra principal
 

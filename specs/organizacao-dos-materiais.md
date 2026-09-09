@@ -70,19 +70,17 @@ Desafios e projeto possuirão páginas permanentes, mas seus casos concretos só
 
 ### Funções dos materiais
 
-A página pública de cada encontro é material completo de aprendizagem e revisão autônoma, desenvolvido em texto narrativo. Ela deve ensinar pelo texto e permitir que o estudante reconstrua o raciocínio, compreenda os conceitos e estude posteriormente, inclusive quando não tiver participado de toda a experiência presencial. Não deve ser transcrição dos slides, roteiro do professor, lista de atividades nem resumo telegráfico.
+A página pública de cada encontro é material completo de aprendizagem e revisão autônoma, desenvolvido em texto narrativo. Ela deve ensinar pelo texto e permitir que o estudante reconstrua o raciocínio, compreenda os conceitos e estude posteriormente, inclusive quando não tiver participado da condução presencial. Não deve ser roteiro do professor, lista de atividades nem resumo telegráfico.
 
-Encontros podem possuir artefatos executáveis em `praticas/encontro-XX/`. Quando a experiência depender de observar e modificar um sistema, o artefato executável pode ocupar o centro do encontro, com a página pública funcionando como interface de condução e material de estudo. Roteiro público e prática podem constituir juntos o material completo.
+Cada novo encontro terá uma prática em `praticas/encontro-XX/`. Quando a experiência depender de observar ou modificar um sistema, o artefato executável ocupa o centro da investigação e o roteiro público funciona como guia de estudo, execução e interpretação. Roteiro e prática constituem juntos o material completo.
 
-Slides não são obrigatórios. Devem ser criados quando agregarem valor específico que roteiro e artefatos não entregam bem. Quando existirem, são instrumentos de condução da experiência presencial e devem cobrir o mesmo percurso conceitual e narrativo da página em linguagem visual e projetável. Todas as ideias centrais, exemplos, contraexemplos, comparações, perguntas, análises, exemplos trabalhados, sínteses intermediárias e transições relevantes devem estar representados no deck. Completude conceitual entre página e slides não implica equivalência textual: uma explicação desenvolvida em parágrafos pode tornar-se uma sequência como `pergunta → diagrama → exemplo → resposta → takeaway`.
+A disciplina não criará slides para novos encontros. O acervo histórico pode permanecer publicado, mas não é pré-requisito nem fonte de verdade para novos materiais. O planejamento pedagógico sustenta roteiro e prática e contém intenção, operação cognitiva, evidência observável, timing, concepções esperadas e decisões de condução. Esses elementos não devem aparecer mecanicamente no texto do estudante: devem ser traduzidos em perguntas, orientações e explicações naturais.
 
-Quando houver deck, perguntas conceitualmente relevantes usadas para conduzir investigação devem ter respostas, análises ou possíveis interpretações posteriormente disponíveis no próprio deck, sem revelação prematura. As notas do apresentador preservam timing e condução, não conteúdo conceitual necessário para estudo posterior em HTML ou PDF.
-
-O planejamento pedagógico sustenta ambos e contém intenção, operação cognitiva, evidência observável, timing, concepções esperadas e decisões de condução. Esses elementos não devem aparecer mecanicamente no texto do estudante: devem ser traduzidos em perguntas, orientações e explicações naturais. Essa separação é de função e não exige, por si só, um novo artefato público.
+Um roteiro autoguiado precisa declarar o problema, a preparação necessária, os comandos executáveis, o que observar, perguntas que orientem a interpretação, análises posteriores e a próxima ação. A prática precisa produzir evidências que o estudante consiga relacionar a essas perguntas. O estudante não deve depender de explicação oral, de um slide ou de uma intervenção do professor para descobrir como começar, interpretar a saída ou recuperar o percurso.
 
 ## Construção dos encontros
 
-O roteiro pedagógico é a fonte do encontro. Antes de produzir materiais derivados, inclusive slides quando forem necessários, devem estar definidos e validados, na medida pertinente:
+O roteiro pedagógico é a fonte do encontro. Antes de produzir o roteiro público e a prática, devem estar definidos e validados, na medida pertinente:
 
 - problema ou necessidade que inicia a trajetória;
 - narrativa conceitual causal que conecta tensões, investigações, formalizações, exemplos e transferências;
@@ -96,26 +94,9 @@ O roteiro pedagógico é a fonte do encontro. Antes de produzir materiais deriva
 
 O encontro não precisa usar todos esses elementos como seções públicas. Detalhes internos de planejamento só devem aparecer ao estudante quando ajudarem a compreender, executar ou avaliar o próprio trabalho, sem rótulos como `Operação cognitiva` ou `Evidência`.
 
-## Slides
+## Acervo histórico de slides
 
-Os slides são derivados de um roteiro pedagogicamente validado e funcionam como instrumento de condução. Não devem ser uma conversão mecânica da página em tópicos.
-
-- `slides/*.md` será a fonte da verdade em Marp;
-- `slides/theme/` conterá o tema compartilhado;
-- `slides/rendered/` conterá HTML e PDF oficiais derivados e versionados;
-- renderizados nunca serão editados manualmente;
-- alterações no fonte ou tema exigirão nova renderização e inspeção visual.
-
-SMA deve reaproveitar a base visual madura de POO, adaptando identidade e semântica. Inicialmente, preservar apenas categorias genéricas quando tiverem função real:
-
-- Pergunta;
-- Conceito;
-- Atividade;
-- Atenção/Armadilha;
-- Síntese;
-- Ideia-chave/Takeaway.
-
-Não inventar uma taxonomia visual extensa. Categorias adicionais, como Evidência ou Decisão Arquitetural, só devem surgir quando justificadas pelo desenho real dos materiais. Perguntas ou exemplos narrativos comuns não precisam virar categorias visuais.
+Os decks existentes em `slides/` e suas distribuições podem ser preservados como registro dos encontros já preparados. Não criar, derivar ou atualizar decks para novos encontros. Uma correção pontual em um deck histórico só é adequada quando corrige erro factual em material já publicado e exige nova renderização do artefato correspondente.
 
 ## Legibilidade
 
@@ -123,10 +104,8 @@ Não inventar uma taxonomia visual extensa. Categorias adicionais, como Evidênc
 - Preferir uma trajetória causal a uma lista de assuntos.
 - Manter exemplos próximos das ideias que ajudam a compreender.
 - Evitar paredes de texto, listas extensas e destaques sem função semântica.
-- Em slides, trabalhar uma ideia principal por frame e preservar legibilidade a distância.
-- Diante de excesso, revisar densidade e divisão antes de reduzir fonte.
-- Obter minimalismo reduzindo a densidade por frame e usando mais frames quando necessário, nunca omitindo partes conceitualmente importantes apenas para reduzir o deck.
-- Usar notas do apresentador para orientações de condução que não precisem permanecer projetadas.
+- No roteiro, dividir explicações, comandos, perguntas e análises para que a sequência permaneça navegável e autoguiada.
+- Na prática, preferir saídas observáveis, casos sintéticos e passos que possam ser repetidos; quando houver alternativas ou falhas comuns, explicá-las no roteiro.
 
 ## Ambiente técnico de referência
 

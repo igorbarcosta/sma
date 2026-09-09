@@ -205,20 +205,20 @@ orientar e encerrar
 <h1 id="e-se-uma-responsabilidade-falhar">E se uma responsabilidade falhar?</h1>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-class="activity" data-theme="sma" lang="C" class="activity" data-marpit-pagination="27" style="--paginate:true;--class:activity;--theme:sma;" data-marpit-pagination-total="46">
-<h2 id="desligue-o-estado-de-prop%C3%B3sito">Desligue o estado de propósito</h2>
+<h2 id="desligue-o-estado-de-prop%C3%B3sito--em-modo-controlado">Desligue o estado de propósito — em modo controlado</h2>
 <p>Preveja o passo seguinte depois de a pessoa informar “É no Lab 4”.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado --offline
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-theme="sma" lang="C" data-marpit-pagination="28" style="--paginate:true;--theme:sma;" data-marpit-pagination-total="46">
-<h2 id="registro-da-vers%C3%A3o-defeituosa">Registro da versão defeituosa</h2>
+<h2 id="trecho-interpretado-da-execu%C3%A7%C3%A3o-controlada">Trecho interpretado da execução controlada</h2>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">NOVA PERCEPÇÃO: É no Lab 4.
 ESTADO ATUAL: local = ?
 
 PASSO 2
 DECISÃO: perguntar_local
 </code></pre>
-<p>O agente pergunta de novo.</p>
+<p>Nesta política simulada, o agente pergunta de novo.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-paginate="true" data-class="question" data-theme="sma" lang="C" class="question" data-marpit-pagination="29" style="--paginate:true;--class:question;--theme:sma;" data-marpit-pagination-total="46">
 <h1 id="a-llm-esqueceu">A LLM “esqueceu”?</h1>
@@ -232,11 +232,11 @@ estado não foi atualizado
       ↓
 decisão seguinte não recebeu a informação
 </code></pre>
-<div class="statement">A falha está na passagem entre percepção e estado.</div>
+<div class="statement">A experiência isola a passagem entre percepção e estado que a política consulta.</div>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-paginate="true" data-class="activity" data-theme="sma" lang="C" class="activity" data-marpit-pagination="31" style="--paginate:true;--class:activity;--theme:sma;" data-marpit-pagination-total="46">
 <h2 id="agora-interrompa-um-ciclo-que-funciona">Agora interrompa um ciclo que funciona</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --limite 1
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --limite 1 --offline
 </code></pre>
 <blockquote>
 <p>Ele deveria ter terminado depois de uma única decisão?</p>
@@ -318,7 +318,7 @@ controlador + validação + parada
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-paginate="true" data-class="synthesis" data-theme="sma" lang="C" class="synthesis" data-marpit-pagination="41" style="--paginate:true;--class:synthesis;--theme:sma;" data-marpit-pagination-total="46">
 <h2 id="duas-falhas-duas-responsabilidades">Duas falhas, duas responsabilidades</h2>
 <div class="columns">
-<div class="card"><strong>Sem estado</strong><br />repete uma pergunta apesar de receber a resposta.</div>
+<div class="card"><strong>Sem estado, em modo controlado</strong><br />repete uma pergunta apesar de receber a resposta.</div>
 <div class="card"><strong>Limite baixo</strong><br />encerra antes de usar a nova percepção.</div>
 </div>
 </section>
@@ -337,7 +337,7 @@ agir no ambiente ?
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="44" data-paginate="true" data-class="activity" data-theme="sma" lang="C" class="activity" data-marpit-pagination="44" style="--paginate:true;--class:activity;--theme:sma;" data-marpit-pagination-total="46">
 <h2 id="miss%C3%A3o-aut%C3%B4noma--localize-a-responsabilidade-que-falta">Missão autônoma — Localize a responsabilidade que falta</h2>
 <p>Abra:</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/atividade_autonoma.py
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/atividade_autonoma.py --offline
 </code></pre>
 <p>Antes de modificar código, registre:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">objetivo · percepção · estado · próximo passo · parada · limite atual
@@ -345,7 +345,7 @@ agir no ambiente ?
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="45" data-paginate="true" data-theme="sma" lang="C" data-marpit-pagination="45" style="--paginate:true;--theme:sma;" data-marpit-pagination-total="46">
 <h2 id="depois-compare-as-duas-execu%C3%A7%C3%B5es">Depois, compare as duas execuções</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado --offline
 </code></pre>
 <p>Registre:</p>
 <ol>

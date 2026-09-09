@@ -1,4 +1,4 @@
 interface:
-  display_name: "Criar slides do encontro"
-  short_description: "Deriva slides de um encontro aprovado"
-  default_prompt: "Use $criar-slides-encontro para derivar o deck de um encontro já validado."
+  display_name: "Slides históricos"
+  short_description: "Corrige decks históricos quando solicitado"
+  default_prompt: "Use $criar-slides-encontro apenas para corrigir um erro factual em um deck histórico."

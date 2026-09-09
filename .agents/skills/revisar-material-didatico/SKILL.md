@@ -1,6 +1,6 @@
 ---
 name: revisar-material-didatico
-description: Revisa materiais didáticos existentes de SMA quanto a correção, clareza, coerência pedagógica, operações cognitivas, evidências e prontidão para uso. Use em pedidos de revisão ou diagnóstico de encontro, desafio, projeto ou deck; por padrão apenas analise e relate, editando somente quando o usuário pedir explicitamente para aplicar ajustes.
+description: Revisa roteiros, práticas, desafios ou projetos de SMA quanto a correção, clareza, coerência pedagógica, operações cognitivas, evidências e prontidão para uso. Use em pedidos de revisão ou diagnóstico; por padrão apenas analise e relate, editando somente quando o usuário pedir explicitamente para aplicar ajustes.
 ---
 
 # Revisar material didático
@@ -32,7 +32,8 @@ description: Revisa materiais didáticos existentes de SMA quanto a correção, 
 - coerência da política de IA e responsabilidade do estudante;
 - em desafios, prioridade para investigação, diagnóstico, intervenção e evidência;
 - no projeto, baseline, comparação, avaliação, redesign e possibilidade legítima de rejeitar múltiplos agentes;
-- em slides, narrativa, legibilidade a distância, densidade, contraste, overflow e fidelidade ao roteiro.
+- coerência entre roteiro e prática: comandos, pré-requisitos, saídas, interpretações e alternativas precisam corresponder;
+- autonomia real: o estudante consegue começar, executar, observar, interpretar e recuperar-se de falhas previsíveis sem depender do professor.
 
 ### Páginas públicas
 
@@ -53,18 +54,15 @@ description: Revisa materiais didáticos existentes de SMA quanto a correção, 
 
 - a página funciona como material de estudo, não como roteiro interno;
 - metadados pedagógicos internos não estão expostos sem necessidade;
-- a página não é uma duplicação dos slides.
+- a página explica a prática, mas não a substitui nem supõe uma explicação oral;
+- o estudante encontra o que executar, o que observar, como interpretar e qual é o próximo passo.
 
-### Slides
+### Práticas
 
-- o arco narrativo aprovado permanece visível e cada frame ajuda a movê-lo;
-- casos, perguntas, revelações, contrastes e progressão visual sustentam o storytelling;
-- todas as ideias, exemplos, contraexemplos, comparações, perguntas, análises, exemplos trabalhados, sínteses e transições conceitualmente importantes da página estão representados;
-- perguntas relevantes recebem posteriormente resposta ou análise no próprio deck, sem revelação prematura e sem depender das notas;
-- o deck pode ser compreendido posteriormente pelo estudante em HTML ou PDF;
-- o minimalismo resulta de baixa densidade por frame, não de omissões para reduzir a quantidade de slides;
-- o deck preserva ritmo e legibilidade sem copiar mecanicamente as explicações detalhadas da página pública;
-- detectar explicitamente o caso de um deck visualmente bonito, mas conceitualmente incompleto.
+- cada comando indicado no roteiro executa como descrito ou falha com mensagem acionável;
+- a saída produz evidência para a pergunta proposta, e a análise ajuda a ligar evidência e conceito;
+- alternativas controladas são explicitamente identificadas quando servem para isolar um comportamento ou garantir reprodução;
+- a prática usa dados seguros e não requer uma configuração oculta, uma ação do professor ou uma inferência não ensinada.
 
 Não propor mudança apenas por preferência editorial nem inventar decisões ausentes.
 

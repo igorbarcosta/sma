@@ -40,6 +40,7 @@ praticas/encontro-03/
 ├── 01_uma_resposta.py
 ├── 02_ciclo_controlado.py
 ├── 03_diagnosticar_o_ciclo.py
+├── 04_validar_decisao.py
 └── atividade_autonoma.py
 ```
 
@@ -94,6 +95,18 @@ Observe o registro. O agente pergunta pelo local, recebe uma resposta da pessoa 
 uv run python praticas/encontro-03/02_ciclo_controlado.py acesso
 ```
 
+### Leia o registro como uma cadeia de responsabilidades
+
+No terminal, não compare a frase produzida com uma resposta “exata”. No modo com LLM, a redação pode variar. Compare as evidências que a arquitetura precisa preservar nos dois casos:
+
+1. `DECISÃO` propõe uma das ações conversacionais permitidas;
+2. `AGENTE` mostra a mensagem que realiza essa ação conversacional;
+3. `NOVA PERCEPÇÃO` mostra a consequência observada no interlocutor simulado;
+4. `ESTADO ATUAL` conserva a informação para a próxima decisão;
+5. `PARADA` mostra que o controlador aceitou a conclusão ou aplicou seu limite de segurança.
+
+No caso `acesso`, mudam objetivo, problema, urgência e local informado. A cadeia de responsabilidades continua a mesma. Isso é o que permite ao CampusBot tratar casos diferentes sem transformar cada conversa em uma sequência fixa de frases.
+
 O programa não é um conjunto de frases em sequência. A cada passo, o controlador entrega ao componente de decisão:
 
 ```text
@@ -114,6 +127,24 @@ O controlador verifica se a escolha respeita os limites e decide se deve termina
 
     Esse limite é deliberado. Neste encontro, investigamos os componentes e o ciclo de controle. No próximo, perguntaremos como o agente pode passar de responder para agir por meio de ferramentas e percepções do ambiente.
 
+## O que entra em uma decisão agora?
+
+Chamaremos de **contexto de decisão** o conjunto de informações que o sistema seleciona e entrega ao decisor naquela rodada. No CampusBot, ele reúne instruções de comportamento, objetivo, percepção mais recente, estado disponível e ações permitidas.
+
+```text
+instruções e limites
+        + objetivo
+        + percepção mais recente
+        + estado selecionado
+        + ações permitidas
+        ↓
+    contexto de decisão
+        ↓
+      próximo passo
+```
+
+Estado e contexto não são sinônimos. O estado é informação que o sistema conserva durante a execução; o contexto é o recorte que chega ao decisor agora. Nesta prática, o controlador entrega todo o estado disponível. Em sistemas maiores, ele pode selecionar apenas parte dele. No Encontro 05, investigaremos essa escolha com mais precisão.
+
 ## O modelo de componentes que a execução tornou necessário
 
 O nome “agente baseado em LLM” não descreve uma peça única. Ele descreve uma organização na qual componentes com responsabilidades diferentes formam um ciclo.
@@ -133,10 +164,11 @@ No CampusBot, cada parte responde a uma pergunta diferente:
 | Objetivo | Delimita o que conta como ajuda neste caso. | O que o sistema tenta alcançar? |
 | Percepção | Traz a mensagem inicial ou a nova resposta da pessoa. | O que acabou de mudar ou ficou conhecido? |
 | Estado | Conserva, por exemplo, o local já informado. | O que o sistema já sabe nesta execução? |
+| Contexto de decisão | Reúne o recorte de informações que chega ao decisor nesta rodada. | Do que a próxima escolha precisa saber agora? |
 | Modelo de decisão | Propõe o próximo passo dentro das opções disponíveis. | Diante disso, o que faz sentido fazer agora? |
-| Ações permitidas | Restringem o que pode ser escolhido: perguntar ou orientar. | O que este agente tem permissão e capacidade para fazer? |
+| Ações permitidas | Restringem o que pode ser escolhido: perguntar ou orientar. | O que este agente tem permissão para propor? |
 | Controlador do ciclo | Entrega informações, valida a decisão e conduz a próxima etapa. | Quem mantém a execução coerente? |
-| Condição de parada | Declara conclusão ou interrompe uma execução excessiva. | Quando o sistema deve deixar de agir? |
+| Condição de parada | Combina uma conclusão proposta com limites externos, como o máximo de passos. | Quando o sistema deve deixar de agir? |
 
 Algumas arquiteturas juntam várias dessas responsabilidades em uma biblioteca; outras as distribuem por funções, serviços ou pessoas. A divisão concreta pode mudar. As responsabilidades continuam sendo úteis para analisar o sistema.
 
@@ -144,27 +176,47 @@ Também não há uma fronteira mágica em que todos os sistemas precisam conter 
 
 ## Missão 2 — Quebre uma responsabilidade de propósito
 
-Um agente não falha apenas porque a LLM “errou”. Execute uma versão deliberadamente defeituosa. Ela recebe novas mensagens, mas deixa de entregar ao decisor o estado atualizado.
+Um agente não falha apenas porque a LLM “errou”. Execute uma versão deliberadamente defeituosa em modo controlado. Ela recebe novas mensagens, mas deixa de entregar ao decisor o estado atualizado.
 
 ```bash
-uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado
+uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado --offline
 ```
 
 Antes de olhar a última linha, responda:
 
 > Depois que a pessoa informa “É no Lab 4”, o que você espera que o agente faça no passo seguinte?
 
-No registro, o agente volta a perguntar pelo local até atingir a parada de segurança. A nova percepção ocorreu, mas ela não foi preservada no estado entregue à decisão seguinte. A explicação não é “o modelo esqueceu” em sentido genérico: a arquitetura desligou a passagem entre percepção e estado.
+Nesta simulação, o agente volta a perguntar pelo local até atingir a parada de segurança. A nova percepção ocorreu, mas ela não foi preservada no estado entregue à decisão seguinte. A explicação não é “o modelo esqueceu” em sentido genérico: a experiência desligou a passagem entre percepção e estado que a política simulada consulta.
+
+O modo controlado é importante: uma LLM também recebe a percepção mais recente — inclusive o texto “É no Lab 4” — e pode extrair dela o local mesmo quando o estado está incompleto. Se isso acontecer no modo padrão, não prova que o estado seja dispensável; mostra que duas fontes de informação chegaram ao decisor. Aqui queremos isolar uma fonte para tornar a falha diagnosticável.
 
 Agora limite um ciclo que funciona:
 
 ```bash
-uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --limite 1
+uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --limite 1 --offline
 ```
 
 Nesse caso, a informação e a decisão podem estar corretas, mas o limite encerra a execução antes da segunda etapa. Limites de passos não demonstram inteligência; são um mecanismo de controle para evitar que um ciclo continue indefinidamente.
 
 Essas duas experiências ainda não são um estudo completo de memória. Aqui, `estado` significa apenas a informação de trabalho necessária durante esta execução. No Encontro 05, investigaremos com mais precisão quais informações devem entrar no contexto, sobreviver entre etapas ou persistir além de uma conversa.
+
+## Missão 3 — Quando uma decisão deve ser recusada?
+
+Até agora, o CampusBot recebeu apenas decisões aceitáveis. Mas uma decisão estruturada não é automaticamente uma decisão executável. Antes de rodar, preveja: se o decisor propuser `abrir_chamado`, o que o controlador pode realmente fazer neste encontro?
+
+```bash
+uv run python praticas/encontro-03/04_validar_decisao.py
+```
+
+Depois, experimente uma incoerência diferente:
+
+```bash
+uv run python praticas/encontro-03/04_validar_decisao.py parada-incoerente
+```
+
+Esses comandos não chamam uma LLM. Eles entregam uma decisão bruta ao mesmo contrato que protege o ciclo para tornar a fronteira visível: o controlador recusa uma ação fora do conjunto permitido e também recusa uma combinação contraditória entre ação e parada. Nenhuma mensagem é enviada e nenhuma consequência é executada depois da recusa.
+
+O modelo pode propor que a conversa terminou; o controlador ainda decide se essa proposta respeita o contrato e mantém um limite externo de passos. Assim, uma declaração de parada do modelo não é uma autorização ilimitada para encerrar ou continuar.
 
 ## O que a LLM faz — e o que ela não faz sozinha
 
@@ -189,7 +241,10 @@ uma resposta
 objetivo + percepção + estado + decisão limitada
 → permite escolher um próximo passo
 
-controlador + validação + parada
+contexto selecionado + decisão validada
+→ separa o que o modelo propõe do que o sistema aceita
+
+controlador + consequência observável + parada
 → transforma decisões sucessivas em um ciclo controlado
 
 sem estado ou sem limite
@@ -211,11 +266,21 @@ Abra `praticas/encontro-03/atividade_autonoma.py`. Antes de alterar qualquer lin
 1. qual é o objetivo;
 2. qual é a percepção inicial;
 3. qual estado precisa sobreviver até a próxima decisão;
-4. qual próximo passo o agente pode escolher;
-5. como ele sabe que deve parar;
-6. qual limite ainda existe porque não há ferramentas.
+4. qual contexto de decisão chega ao modelo neste passo;
+5. qual próximo passo o agente pode escolher;
+6. como o controlador pode aceitar ou recusar a parada;
+7. qual limite ainda existe porque não há ferramentas.
 
-Em seguida, execute o ciclo normal e a versão com `--sem-estado`. Registre qual responsabilidade falhou, qual linha do terminal sustenta sua conclusão e qual seria a menor mudança arquitetural para repará-la.
+Em seguida, execute os dois casos controlados e compare o que mudou no problema com o que permaneceu na arquitetura:
+
+```bash
+uv run python praticas/encontro-03/atividade_autonoma.py projetor --offline
+uv run python praticas/encontro-03/atividade_autonoma.py acesso --offline
+uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado --offline
+uv run python praticas/encontro-03/04_validar_decisao.py
+```
+
+Registre qual responsabilidade falhou na versão sem estado, qual linha do terminal sustenta sua conclusão e qual seria a menor mudança arquitetural para repará-la. No último comando, registre também qual regra fez o controlador recusar a decisão e qual consequência deixou de ocorrer. O modo padrão com LLM continua disponível para explorar o ciclo; aqui, `--offline` torna a comparação reproduzível.
 
 Termine com a pergunta que abrirá o Encontro 04:
 

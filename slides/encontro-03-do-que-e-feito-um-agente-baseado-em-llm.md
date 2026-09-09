@@ -319,19 +319,19 @@ limite de passos atingido
 ---
 <!-- _class: activity -->
 
-## Desligue o estado de propósito
+## Desligue o estado de propósito — em modo controlado
 
 Preveja o passo seguinte depois de a pessoa informar “É no Lab 4”.
 
 ```bash
-uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado
+uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado --offline
 ```
 
 <!-- [ESSENCIAL] Peça previsão; só então execute. ~80–100 min. -->
 
 ---
 
-## Registro da versão defeituosa
+## Trecho interpretado da execução controlada
 
 ```text
 NOVA PERCEPÇÃO: É no Lab 4.
@@ -341,7 +341,7 @@ PASSO 2
 DECISÃO: perguntar_local
 ```
 
-O agente pergunta de novo.
+Nesta política simulada, o agente pergunta de novo.
 
 ---
 <!-- _class: question -->
@@ -362,7 +362,7 @@ estado não foi atualizado
 decisão seguinte não recebeu a informação
 ```
 
-<div class="statement">A falha está na passagem entre percepção e estado.</div>
+<div class="statement">A experiência isola a passagem entre percepção e estado que a política consulta.</div>
 
 ---
 <!-- _class: activity -->
@@ -370,7 +370,7 @@ decisão seguinte não recebeu a informação
 ## Agora interrompa um ciclo que funciona
 
 ```bash
-uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --limite 1
+uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --limite 1 --offline
 ```
 
 > Ele deveria ter terminado depois de uma única decisão?
@@ -496,7 +496,7 @@ controlador + validação + parada
 ## Duas falhas, duas responsabilidades
 
 <div class="columns">
-<div class="card"><strong>Sem estado</strong><br>repete uma pergunta apesar de receber a resposta.</div>
+<div class="card"><strong>Sem estado, em modo controlado</strong><br>repete uma pergunta apesar de receber a resposta.</div>
 <div class="card"><strong>Limite baixo</strong><br>encerra antes de usar a nova percepção.</div>
 </div>
 
@@ -527,7 +527,7 @@ agir no ambiente ?
 Abra:
 
 ```bash
-uv run python praticas/encontro-03/atividade_autonoma.py
+uv run python praticas/encontro-03/atividade_autonoma.py --offline
 ```
 
 Antes de modificar código, registre:
@@ -543,7 +543,7 @@ objetivo · percepção · estado · próximo passo · parada · limite atual
 ## Depois, compare as duas execuções
 
 ```bash
-uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado
+uv run python praticas/encontro-03/03_diagnosticar_o_ciclo.py --sem-estado --offline
 ```
 
 Registre:
