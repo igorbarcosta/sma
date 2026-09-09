@@ -26,7 +26,7 @@ def _registrar_resposta(caso: dict[str, Any], estado: dict[str, Any]) -> str:
 def executar_ciclo(
     caso_id: str,
     *,
-    online: bool = False,
+    offline: bool = False,
     manter_estado: bool = True,
     limite_passos: int = 4,
 ) -> None:
@@ -41,7 +41,7 @@ def executar_ciclo(
 
     for passo in range(1, limite_passos + 1):
         estado_para_decisao = estado if manter_estado else caso["estado_inicial"]
-        decisao = decidir(objetivo, observacao, estado_para_decisao, online=online)
+        decisao = decidir(objetivo, observacao, estado_para_decisao, offline=offline)
         print(f"\nPASSO {passo}")
         print(f"DECISÃO: {decisao['acao']}")
         print(f"MOTIVO: {decisao['motivo']}")

@@ -40,7 +40,7 @@ praticas/encontro-02/
 └── atividade_autonoma.py
 ```
 
-O percurso funciona completamente sem chave e sem internet. Nas etapas com LLM, o padrão é uma simulação transparente. O terminal sempre anuncia um dos modos:
+Nas etapas com LLM, o percurso usa por padrão o modelo definido em `config/llm.toml`. Para isso, configure uma `GEMINI_API_KEY` pessoal conforme o [guia de ambiente](../materiais/ambiente.md). O terminal anuncia um dos modos:
 
 ```text
 MODO ONLINE — GEMINI
@@ -52,7 +52,7 @@ ou:
 MODO OFFLINE — RESPOSTA SIMULADA
 ```
 
-Uma resposta preparada nunca será apresentada como saída do modelo. O modo online é opcional e só ocorre quando você acrescenta `--online` ao comando.
+Uma resposta preparada nunca será apresentada como saída do modelo. Se precisar executar sem chave ou sem internet, acrescente `--offline` ao comando para selecionar a simulação transparente.
 
 ## Missão 0 — O sistema precisava ser agente?
 
@@ -107,7 +107,7 @@ linguagem natural
 → código executa a consequência simulada
 ```
 
-Antes de executar, preveja a estrutura extraída e a ação final. Então rode no modo offline:
+Antes de executar, preveja a estrutura extraída e a ação final. Então rode:
 
 ```bash
 uv run python praticas/encontro-02/02_workflow_com_llm.py
@@ -130,17 +130,15 @@ Observe no terminal três fronteiras: o modo da LLM, a estrutura devolvida e a r
 
     Usar uma LLM e delegar o controle da trajetória são decisões diferentes. **Podemos usar uma LLM sem entregar a ela o controle da trajetória.**
 
-### Modo online opcional
+### Alternativa offline
 
-Quando decidir experimentar o modo online no Codespaces, cadastre `GEMINI_API_KEY` como **Codespaces Secret** e permita seu uso no repositório `igorbarcosta/sma`. Se o Codespace já estiver aberto, reinicie-o para receber o secret. Não coloque a chave no código nem em arquivos do repositório. As instruções completas estão no [guia de ambiente](../materiais/ambiente.md).
-
-Depois, execute explicitamente:
+Se estiver sem chave ou sem internet, use a resposta simulada de modo explícito:
 
 ```bash
-uv run python praticas/encontro-02/02_workflow_com_llm.py --online
+uv run python praticas/encontro-02/02_workflow_com_llm.py --offline
 ```
 
-O programa lê provider e modelo de `config/llm.toml`, solicita uma resposta estruturada pelo SDK `google-genai` e valida a estrutura recebida. Sem `--online`, nenhuma chamada externa é feita, mesmo que exista uma chave no ambiente.
+No modo padrão, o programa lê provider e modelo de `config/llm.toml`, solicita uma resposta estruturada pelo SDK `google-genai` e valida a estrutura recebida. Com `--offline`, nenhuma chamada externa é feita, mesmo que exista uma chave no ambiente.
 
 ## Missão 3 — O workflow começa a crescer
 
@@ -235,12 +233,12 @@ Depois compare com um estado incompleto:
 uv run python praticas/encontro-02/04_decisao_dinamica.py computador-ferias
 ```
 
-No modo offline, uma decisão simulada torna o percurso reproduzível. No modo online opcional, `--online` delega a escolha ao modelo. Nos dois modos, Python valida a ação, limita as possibilidades e executa apenas uma consequência simulada. A LLM não executa código arbitrário e não há tool calling.
+No modo padrão, a escolha é delegada ao modelo. Com `--offline`, uma decisão simulada torna o percurso reproduzível sem chamada externa. Nos dois modos, Python valida a ação, limita as possibilidades e executa apenas uma consequência simulada. A LLM não executa código arbitrário e não há tool calling.
 
 > **Ainda não construímos um agente completo.** Apenas deslocamos parte da decisão do próximo passo para tempo de execução, produzindo uma **decisão mais agentiva**. Ainda não há um ciclo contínuo de percepção, decisão, ação e nova percepção, nem execução autônoma de uma sequência adaptativa, tool calling ou um runtime agentivo completo. Esses elementos serão estudados em outros momentos.
 
 ```bash
-uv run python praticas/encontro-02/04_decisao_dinamica.py internet-urgente --online
+uv run python praticas/encontro-02/04_decisao_dinamica.py internet-urgente --offline
 ```
 
 Compare a distribuição de responsabilidades:
@@ -258,7 +256,7 @@ sistema escolhe parte da trajetória em execução
 
 ??? "Pontos para conferir na observação"
 
-    Ganhamos flexibilidade para escolher uma ação a partir do estado sem codificar antecipadamente o ramo exato. Em troca, reduzimos previsibilidade, acrescentamos uma chamada ao modelo no modo online, percebemos latência e tornamos algumas falhas mais difíceis de explicar.
+    Ganhamos flexibilidade para escolher uma ação a partir do estado sem codificar antecipadamente o ramo exato. Em troca, reduzimos previsibilidade, acrescentamos uma chamada ao modelo, percebemos latência e tornamos algumas falhas mais difíceis de explicar.
 
     A validação e a lista de ações preservam limites importantes, mas não eliminam custo ou variabilidade. A pergunta não é se essa arquitetura é mais moderna; é se a flexibilidade comprada serve ao requisito.
 

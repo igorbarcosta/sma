@@ -36,8 +36,19 @@ O endereço será informado quando o repositório remoto existir.
 uv run python scripts/check_env.py
 ```
 
-Não é necessário configurar a Gemini para criar o Codespace ou executar práticas em modo offline.
+### Continuar no mesmo Codespace
 
-Quando quiser usar o modo online, cadastre `GEMINI_API_KEY` como secret pessoal do Codespaces e permita seu uso neste repositório. Se o Codespace já estiver aberto, reinicie-o para receber o novo secret. O teste opcional de conectividade usa o mesmo comando `--check-api` nos dois ambientes. O diagnóstico comum não chama a API nem consome quota.
+Use o mesmo Codespace ao longo dos encontros. Quando novos materiais forem publicados, abra esse ambiente e, da raiz do repositório, execute:
+
+```bash
+git pull --ff-only
+uv sync --locked
+```
+
+O primeiro comando atualiza os materiais sem criar um merge; o segundo confirma que o ambiente corresponde às dependências versionadas. Se o Git informar que uma alteração sua impede a atualização, não a descarte: preserve seu trabalho e peça orientação.
+
+Não é necessário configurar a Gemini para criar o Codespace. Para executar práticas que usam LLM no modo padrão, cadastre `GEMINI_API_KEY` como secret pessoal do Codespaces e permita seu uso neste repositório. Se ele já estiver aberto, reinicie-o para receber o secret.
+
+Quando uma prática oferecer `--offline`, essa opção permite usar a simulação preparada sem chave ou internet. O teste opcional de conectividade usa o mesmo comando `--check-api` nos dois ambientes. O diagnóstico comum não chama a API nem consome quota.
 
 Os encontros futuros deverão usar os mesmos comandos nos dois ambientes. Cada estudante é responsável por sua própria credencial; não existe chave compartilhada da turma. Não use dados pessoais, institucionais, confidenciais ou sensíveis nos exercícios. Os materiais oficiais usam somente dados sintéticos ou controlados.

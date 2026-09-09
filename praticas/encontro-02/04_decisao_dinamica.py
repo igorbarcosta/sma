@@ -9,13 +9,13 @@ from suporte import buscar_caso, executar_acao
 
 parser = argparse.ArgumentParser()
 parser.add_argument("caso", nargs="?", default="internet-urgente")
-parser.add_argument("--online", action="store_true", help="faz uma chamada real à Gemini API")
+parser.add_argument("--offline", action="store_true", help="usa uma decisão simulada, sem chamar a Gemini API")
 args = parser.parse_args()
 
 caso = buscar_caso(args.caso)
 objetivo = "Ajudar a resolver a solicitação usando somente ações permitidas."
 try:
-    decisao = decidir(objetivo, caso["estado"], online=args.online)
+    decisao = decidir(objetivo, caso["estado"], offline=args.offline)
 except RuntimeError as erro:
     raise SystemExit(f"ERRO: {erro}") from erro
 

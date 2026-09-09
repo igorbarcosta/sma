@@ -14,14 +14,14 @@ parser.add_argument(
     default="O Wi-Fi morreu no laboratório e minha apresentação começa daqui a pouco.",
     help="identificador de casos.json ou mensagem livre",
 )
-parser.add_argument("--online", action="store_true", help="faz uma chamada real à Gemini API")
+parser.add_argument("--offline", action="store_true", help="usa uma resposta simulada, sem chamar a Gemini API")
 args = parser.parse_args()
 
 casos_por_id = {caso["id"]: caso for caso in carregar_casos()}
 mensagem = casos_por_id.get(args.entrada, {}).get("mensagem", args.entrada)
 
 try:
-    estado = interpretar(mensagem, online=args.online)
+    estado = interpretar(mensagem, offline=args.offline)
 except RuntimeError as erro:
     raise SystemExit(f"ERRO: {erro}") from erro
 acao = encaminhar_por_regras(estado)

@@ -416,14 +416,14 @@ Contexto, estado e memória serão investigados com mais precisão no Encontro 0
 ---
 <!-- _class: question -->
 
-# Onde entra uma LLM real?
+# Onde entra a LLM padrão?
 
 ---
 
-## Uma LLM sob restrições
+## A LLM sob restrições
 
 ```bash
-uv run python praticas/encontro-03/02_ciclo_controlado.py --online
+uv run python praticas/encontro-03/02_ciclo_controlado.py
 ```
 
 Ela recebe:
@@ -434,7 +434,7 @@ objetivo + observação + estado + ações conversacionais
 
 e devolve uma decisão estruturada.
 
-<!-- [EXPANSÃO] Use apenas para demonstrar o modo online ou discutir o contrato de saída. A prática offline é a experiência principal. -->
+<!-- [ESSENCIAL] A experiência padrão usa a LLM. Use o modo offline apenas quando a credencial ou a conectividade não estiverem disponíveis. -->
 
 ---
 
@@ -463,14 +463,14 @@ a combinação ação / parada é coerente?
 
 ---
 
-## No modo offline, a LLM é simulada
+## Com `--offline`, a LLM é simulada
 
 ```text
 if local ausente → perguntar local
 if local presente → orientar e encerrar
 ```
 
-Isso não transforma a lição em “`if` versus LLM”.
+Essa alternativa não transforma a lição em “`if` versus LLM”.
 
 <div class="statement">A arquitetura continua visível porque o problema é organizar informações, limites e continuidade.</div>
 

@@ -10,17 +10,22 @@ Agora precisamos abrir essa caixa, sem confundir seus componentes. Uma LLM pode 
 
 Usaremos novamente um caso sintético do CampusBot. Nenhum exemplo usa dados reais de estudantes ou da instituição.
 
-!!! tip "Abrir a prática no GitHub Codespaces"
+!!! tip "Continue no seu Codespace do Encontro 02"
 
-    [Abrir no GitHub Codespaces](https://codespaces.new/igorbarcosta/sma/tree/main){ .md-button .md-button--primary }
+    Abra o Codespace que você já criou para a disciplina. Da raiz do repositório, atualize os materiais e o ambiente:
 
-    Quando o terminal estiver pronto, comece por:
+    ```bash
+    git pull --ff-only
+    uv sync --locked
+    ```
+
+    Em seguida, comece por:
 
     ```bash
     uv run python praticas/encontro-03/01_uma_resposta.py
     ```
 
-    Para executar localmente, use o [ambiente da disciplina](../materiais/ambiente.md).
+    Não crie outro Codespace apenas para este encontro. Se você ainda não tem um ambiente da disciplina, use o [guia de ambiente](../materiais/ambiente.md).
 
 ## Antes de começar
 
@@ -38,13 +43,19 @@ praticas/encontro-03/
 └── atividade_autonoma.py
 ```
 
-Ela funciona sem chave e sem internet. Por padrão, a decisão que representaria a LLM é simulada de modo explícito e reproduzível. O terminal informa:
+Por padrão, ela usa o modelo definido em `config/llm.toml`; para isso, é necessária uma `GEMINI_API_KEY` pessoal configurada conforme o [guia de ambiente](../materiais/ambiente.md). O terminal informa:
 
 ```text
-MODO OFFLINE — DECISÃO SIMULADA
+MODO ONLINE — GEMINI
 ```
 
-O modo online é opcional. Somente ao acrescentar `--online`, o programa usa o modelo definido em `config/llm.toml`; nesse caso, é necessária uma `GEMINI_API_KEY` pessoal configurada no ambiente. A prática não grava nem mostra chaves.
+Se precisar executar sem chave ou sem internet, acrescente `--offline`. Nesse modo, a decisão que representaria a LLM é simulada de modo explícito e reproduzível; o terminal informa `MODO OFFLINE — DECISÃO SIMULADA`:
+
+```bash
+uv run python praticas/encontro-03/02_ciclo_controlado.py --offline
+```
+
+A prática não grava nem mostra chaves.
 
 ## Missão 0 — Uma boa resposta já basta?
 
@@ -157,15 +168,15 @@ Essas duas experiências ainda não são um estudo completo de memória. Aqui, `
 
 ## O que a LLM faz — e o que ela não faz sozinha
 
-Quando o modo online está habilitado, a LLM recebe objetivo, observação, estado e um conjunto pequeno de ações conversacionais. Ela devolve uma escolha em formato estruturado. O programa aceita apenas escolhas válidas e mantém o controle de continuar ou encerrar.
+No modo padrão, a LLM recebe objetivo, observação, estado e um conjunto pequeno de ações conversacionais. Ela devolve uma escolha em formato estruturado. O programa aceita apenas escolhas válidas e mantém o controle de continuar ou encerrar.
 
 ```bash
-uv run python praticas/encontro-03/02_ciclo_controlado.py --online
+uv run python praticas/encontro-03/02_ciclo_controlado.py
 ```
 
 Isso torna a LLM um componente de decisão sob restrições. Ela não ganha, por isso, acesso automático a e-mail, banco de dados, terminal, equipamentos ou sistemas institucionais. Tampouco garante que uma resposta esteja correta: o restante da arquitetura precisa definir informações, limites, validações e formas de observar consequências.
 
-No modo offline, uma política preparada ocupa provisoriamente o lugar da LLM. A arquitetura continua visível porque a lição não é “o `if` virou uma LLM”; é que um sistema precisa organizar o que percebe, o que conserva, quem decide, quais escolhas aceita e como o ciclo termina.
+Com `--offline`, uma política preparada ocupa provisoriamente o lugar da LLM. A arquitetura continua visível porque a lição não é “o `if` virou uma LLM”; é que um sistema precisa organizar o que percebe, o que conserva, quem decide, quais escolhas aceita e como o ciclo termina.
 
 ## Síntese — o agente não cabe em uma chamada ao modelo
 

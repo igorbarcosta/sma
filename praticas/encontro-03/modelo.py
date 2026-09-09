@@ -20,10 +20,10 @@ def _modelo_configurado() -> str:
     return str(configuracao["model"])
 
 
-def _gerar_online(prompt: str) -> dict[str, Any]:
+def _gerar_com_gemini(prompt: str) -> dict[str, Any]:
     chave = os.environ.get("GEMINI_API_KEY")
     if not chave:
-        raise RuntimeError("Defina GEMINI_API_KEY ou execute sem --online.")
+        raise RuntimeError("Defina GEMINI_API_KEY ou execute com --offline.")
 
     from google import genai
     from google.genai import types
@@ -77,11 +77,13 @@ def _decisao_simulada(estado: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def decidir(objetivo: str, observacao: str, estado: dict[str, Any], online: bool) -> dict[str, Any]:
+def decidir(objetivo: str, observacao: str, estado: dict[str, Any], offline: bool) -> dict[str, Any]:
     """Produz uma decisão limitada a duas ações conversacionais."""
-    print("MODO ONLINE — GEMINI" if online else "MODO OFFLINE — DECISÃO SIMULADA")
-    if online:
-        decisao = _gerar_online(
+    print("MODO OFFLINE — DECISÃO SIMULADA" if offline else "MODO ONLINE — GEMINI")
+    if offline:
+        decisao = _decisao_simulada(estado)
+    else:
+        decisao = _gerar_com_gemini(
             "Você é o componente de decisão de um agente didático.\n"
             f"Objetivo: {objetivo}\n"
             f"Observação mais recente: {observacao}\n"
@@ -90,9 +92,6 @@ def decidir(objetivo: str, observacao: str, estado: dict[str, Any], online: bool
             "qualquer ação externa. Se o local estiver ausente, pergunte por ele; se estiver "
             "presente, oriente e encerre."
         )
-    else:
-        decisao = _decisao_simulada(estado)
-
     if decisao.get("acao") not in ACOES_CONVERSACIONAIS:
         raise ValueError("Ação recusada: não pertence ao conjunto conversacional permitido.")
     if not isinstance(decisao.get("mensagem"), str):

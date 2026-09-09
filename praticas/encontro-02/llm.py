@@ -22,10 +22,10 @@ def _modelo_configurado() -> str:
     return str(configuracao["model"])
 
 
-def _gerar_online(prompt: str, schema: dict[str, Any]) -> dict[str, Any]:
+def _gerar_com_gemini(prompt: str, schema: dict[str, Any]) -> dict[str, Any]:
     chave = os.environ.get("GEMINI_API_KEY")
     if not chave:
-        raise RuntimeError("Defina GEMINI_API_KEY ou execute sem --online.")
+        raise RuntimeError("Defina GEMINI_API_KEY ou execute com --offline.")
 
     from google import genai
     from google.genai import types
@@ -58,10 +58,12 @@ def _caso_simulado(mensagem: str) -> dict[str, Any]:
     return {"categoria": "outro", "urgente": False, "local": None}
 
 
-def interpretar(mensagem: str, online: bool) -> dict[str, Any]:
-    print("MODO ONLINE — GEMINI" if online else "MODO OFFLINE — RESPOSTA SIMULADA")
-    if online:
-        estado = _gerar_online(
+def interpretar(mensagem: str, offline: bool) -> dict[str, Any]:
+    print("MODO OFFLINE — RESPOSTA SIMULADA" if offline else "MODO ONLINE — GEMINI")
+    if offline:
+        estado = _caso_simulado(mensagem)
+    else:
+        estado = _gerar_com_gemini(
             "Extraia somente os dados da solicitação sintética a seguir. "
             "Não invente local nem urgência.\n\n" + mensagem,
             {
@@ -75,9 +77,6 @@ def interpretar(mensagem: str, online: bool) -> dict[str, Any]:
                 "additionalProperties": False,
             },
         )
-    else:
-        estado = _caso_simulado(mensagem)
-
     if estado.get("categoria") not in CATEGORIAS or not isinstance(estado.get("urgente"), bool):
         raise ValueError("A resposta não corresponde à estrutura esperada.")
     if estado.get("local") is not None and not isinstance(estado["local"], str):
@@ -85,10 +84,22 @@ def interpretar(mensagem: str, online: bool) -> dict[str, Any]:
     return estado
 
 
-def decidir(objetivo: str, estado: dict[str, Any], online: bool) -> dict[str, str]:
-    print("MODO ONLINE — GEMINI" if online else "MODO OFFLINE — RESPOSTA SIMULADA")
-    if online:
-        decisao = _gerar_online(
+def decidir(objetivo: str, estado: dict[str, Any], offline: bool) -> dict[str, str]:
+    print("MODO OFFLINE — RESPOSTA SIMULADA" if offline else "MODO ONLINE — GEMINI")
+    if offline:
+        if not estado.get("local"):
+            decisao = {"acao": "pedir_informacao", "motivo": "o local não foi informado"}
+        elif estado.get("urgente"):
+            decisao = {
+                "acao": "abrir_chamado_prioritario",
+                "motivo": "há impacto imediato e o local é conhecido",
+            }
+        elif estado.get("categoria") == "objeto_perdido":
+            decisao = {"acao": "fornecer_orientacao", "motivo": "há orientação conhecida para o caso"}
+        else:
+            decisao = {"acao": "abrir_chamado_normal", "motivo": "há dados suficientes para registrar"}
+    else:
+        decisao = _gerar_com_gemini(
             f"Objetivo: {objetivo}\nEstado: {json.dumps(estado, ensure_ascii=False)}\n"
             f"Escolha uma ação entre: {sorted(ACOES_PERMITIDAS)}. Explique brevemente.",
             {
@@ -101,18 +112,6 @@ def decidir(objetivo: str, estado: dict[str, Any], online: bool) -> dict[str, st
                 "additionalProperties": False,
             },
         )
-    elif not estado.get("local"):
-        decisao = {"acao": "pedir_informacao", "motivo": "o local não foi informado"}
-    elif estado.get("urgente"):
-        decisao = {
-            "acao": "abrir_chamado_prioritario",
-            "motivo": "há impacto imediato e o local é conhecido",
-        }
-    elif estado.get("categoria") == "objeto_perdido":
-        decisao = {"acao": "fornecer_orientacao", "motivo": "há orientação conhecida para o caso"}
-    else:
-        decisao = {"acao": "abrir_chamado_normal", "motivo": "há dados suficientes para registrar"}
-
     if decisao.get("acao") not in ACOES_PERMITIDAS or not isinstance(decisao.get("motivo"), str):
         raise ValueError("A decisão não corresponde à estrutura ou aos limites esperados.")
     return {"acao": decisao["acao"], "motivo": decisao["motivo"]}

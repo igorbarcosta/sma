@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser(description="Executa versões deliberadamente l
 parser.add_argument("caso", nargs="?", default="projetor")
 parser.add_argument("--sem-estado", action="store_true", help="não entrega ao decisor o estado atualizado")
 parser.add_argument("--limite", type=int, default=4, help="quantidade máxima de passos")
-parser.add_argument("--online", action="store_true", help="faz uma chamada real à Gemini API")
+parser.add_argument("--offline", action="store_true", help="usa uma decisão simulada, sem chamar a Gemini API")
 args = parser.parse_args()
 
 if args.limite < 1:
@@ -18,7 +18,7 @@ if args.limite < 1:
 try:
     executar_ciclo(
         args.caso,
-        online=args.online,
+        offline=args.offline,
         manter_estado=not args.sem_estado,
         limite_passos=args.limite,
     )
