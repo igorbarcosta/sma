@@ -91,6 +91,8 @@ def _gerar_decisao(pedido: str, observacoes: list[dict[str, Any]]) -> dict[str, 
                 f"Pedido da pessoa: {pedido}\n"
                 f"Resultados observados: {json.dumps(observacoes, ensure_ascii=False)}\n"
                 "Ferramentas: consultar_chamados(local) lista chamados; abrir_chamado(local, problema) tenta registrar.\n"
+                "Quando usar uma ferramenta, devolva exatamente as chaves tipo, ferramenta e argumentos; "
+                "argumentos deve conter local como texto e, ao abrir, problema como texto.\n"
                 "Se o pedido disser para verificar antes, consulte antes de abrir. Se encontrar chamado, responda sem abrir outro. "
                 "Só diga que abriu se o resultado tiver ok=true; se falhar, reconheça a falha."
             ),
@@ -101,7 +103,13 @@ def _gerar_decisao(pedido: str, observacoes: list[dict[str, Any]]) -> dict[str, 
                     "properties": {
                         "tipo": {"type": "string", "enum": ["usar_ferramenta", "responder"]},
                         "ferramenta": {"type": "string"},
-                        "argumentos": {"type": "object"},
+                        "argumentos": {
+                            "type": "object",
+                            "properties": {
+                                "local": {"type": "string"},
+                                "problema": {"type": "string"},
+                            },
+                        },
                         "mensagem": {"type": "string"},
                     },
                     "required": ["tipo"],
@@ -123,7 +131,15 @@ def validar_decisao(decisao: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("A decisão precisa ser um objeto.")
     if decisao.get("tipo") == "responder" and isinstance(decisao.get("mensagem"), str):
         return decisao
-    if decisao.get("tipo") == "usar_ferramenta" and decisao.get("ferramenta") in FERRAMENTAS_DISPONIVEIS and isinstance(decisao.get("argumentos"), dict):
+    if decisao.get("tipo") == "usar_ferramenta" and decisao.get("ferramenta") in FERRAMENTAS_DISPONIVEIS:
+        argumentos = decisao.get("argumentos")
+        if not isinstance(argumentos, dict):
+            raise ValueError("Decisão recusada: a ferramenta precisa de um objeto argumentos.")
+        exigidos = {"local"} if decisao["ferramenta"] == "consultar_chamados" else {"local", "problema"}
+        ausentes = sorted(campo for campo in exigidos if not isinstance(argumentos.get(campo), str) or not argumentos[campo].strip())
+        if ausentes:
+            campos = ", ".join(ausentes)
+            raise ValueError(f"Decisão recusada: faltam argumentos de {decisao['ferramenta']}: {campos}.")
         return decisao
     raise ValueError("Decisão recusada: use responder ou uma ferramenta disponível com argumentos.")
 
