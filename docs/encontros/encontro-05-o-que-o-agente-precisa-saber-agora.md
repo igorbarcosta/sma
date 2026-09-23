@@ -4,7 +4,7 @@
 
 !!! tip "Abra o Codespace e atualize os materiais"
 
-    Recomendamos continuar no Codespace da disciplina. Se ainda não tiver um, [abra o repositório no GitHub Codespaces](https://codespaces.new/igorbarcosta/sma/tree/main). No terminal, a partir da raiz do repositório, execute:
+    Recomendamos continuar no Codespace da disciplina. Se ainda não tiver um, [abra o repositório no GitHub Codespaces](https://github.com/codespaces). No terminal, a partir da raiz do repositório, execute:
 
     ```bash
     git pull --ff-only
@@ -14,54 +14,65 @@
 
     Se o Git indicar que alterações suas impedem a atualização, preserve seu trabalho e consulte o [guia de ambiente](../materiais/ambiente.md). O mesmo projeto também pode ser executado localmente.
 
-No [Encontro 04](encontro-04-como-um-agente-passa-de-responder-para-agir.md), o CampusBot aprendeu a solicitar `consultar_chamados` e `abrir_chamado`. O programa executava a ferramenta, devolvia o resultado e pedia uma nova decisão. Agora ele já consegue agir. Vamos investigar o que ocorre quando a informação que chega à próxima decisão é pouca, excessiva ou incorreta — e quando a execução termina.
+No [Encontro 04](encontro-04-como-um-agente-passa-de-responder-para-agir.md), o CampusBot aprendeu a consultar chamados e a abrir um novo. O modelo solicitava uma ferramenta, o programa a executava e devolvia o resultado para outra decisão. A última peça parecia estar no lugar: o agente já conseguia agir.
 
-**Slides de condução:** [HTML](../slides/rendered/encontro-05-o-que-o-agente-precisa-saber-agora.html) · [PDF](../slides/rendered/encontro-05-o-que-o-agente-precisa-saber-agora.pdf). A página e a prática em `praticas/encontro-05/` bastam para estudar sem eles.
+Mas imagine o pedido seguinte: “Veja se já existe um chamado para o projetor do Lab 4. Se não existir, abra um.” Se a consulta não encontrar nada, a próxima decisão parece simples. Será que basta a ferramenta devolver `[]` para o CampusBot avançar? Vamos seguir o resultado de uma rodada até a seguinte. Depois investigaremos o que acontece quando o decisor recebe informação demais, informação de menos ou uma informação que já não descreve o ambiente. Por fim, encerraremos o programa e perguntaremos o que ainda pode ser lembrado.
 
 Os chamados são locais e fictícios. O modo `--offline` anuncia um decisor simulado e reproduzível. Sem ele, os ciclos principais usam Gemini configurado em `config/llm.toml` e exigem `GEMINI_API_KEY`. Nenhuma credencial é gravada.
 
-Em cada experimento, **preveja** a próxima decisão antes de executar. Depois leia `[ESTADO ANTES]`, `[CONTEXTO ENVIADO AO MODELO]`, `[FICOU FORA]`, `[DECISÃO]` e `[RESULTADO DA FERRAMENTA]`. Explique a saída antes de passar ao próximo. Os nove experimentos são variações do mesmo pedido: “Veja se já existe um chamado para o projetor do Lab 4. Se não existir, abra um.”
+Cada comando inicia uma versão isolada desse mesmo caso sintético; um chamado criado em um comando não aparece automaticamente no seguinte. A exceção será a experiência em que gravaremos deliberadamente um arquivo para outra execução. Antes de rodar cada versão, preveja sua próxima decisão. No terminal, as seções `[ESTADO ANTES]`, `[CONTEXTO ENVIADO AO MODELO]`, `[FICOU FORA]`, `[DECISÃO]` e `[RESULTADO DA FERRAMENTA]` permitem confrontar a previsão com o que ocorreu.
 
-## Ato 1 — O resultado chegou; por que o agente repete a consulta? (aprox. 0–50 min)
+## O resultado chegou; por que o agente repete a consulta?
 
-Retome apenas a cadeia `decidir → solicitar → executar → observar → decidir`. Então rode, antes de definir qualquer conceito novo:
+Lembre a cadeia que acabou de construir: `decidir → solicitar → executar → observar → decidir novamente`. Na primeira versão, a consulta devolve uma lista vazia. Antes de executar, responda: se nenhum chamado foi encontrado, qual deveria ser a próxima ferramenta?
 
 ```bash
 uv run python praticas/encontro-05/01_esqueceu_o_resultado.py --offline
 ```
 
-**Experimento 1 — resultado descartado.** Preveja o que ocorre depois de `consultar_chamados("Lab 4")` devolver `[]`. A ferramenta funcionou, mas o controlador descarta o resultado de propósito. Na rodada seguinte, `ultima_consulta` ainda é `null`; a decisão solicita a mesma consulta. O limite de rodadas interrompe a repetição. A falha está no modelo, na ferramenta ou entre uma rodada e outra? A saída separa essas possibilidades.
+Procure primeiro `[RESULTADO DA FERRAMENTA]`: a consulta devolveu `{"ok": true, "chamados": []}`. Agora avance até `[ESTADO DEPOIS]`. `ultima_consulta` continua `null`. Na rodada seguinte, o contexto também não contém o resultado e a decisão solicita `consultar_chamados` outra vez. O limite de rodadas interrompe a repetição.
 
-Faça a menor mudança conceitual: conservar o resultado da ferramenta. A versão seguinte chama `atualizar_estado(estado, ferramenta, resultado)` depois da execução:
+> A ferramenta falhou? O decisor recebeu uma consulta vazia e mesmo assim a ignorou? Ou a informação se perdeu entre uma rodada e outra?
+
+As duas seções do terminal sustentam a terceira explicação: a consulta aconteceu, mas seu resultado foi descartado antes de poder orientar outra decisão. O aviso `[FALHA PLANEJADA]` torna essa passagem explícita. O problema não exige uma ferramenta nova; exige conservar uma descoberta da ferramenta que já existe.
+
+Para testar a menor mudança, execute a versão que conserva o resultado da ferramenta. Ela chama `atualizar_estado(estado, ferramenta, resultado)` depois da execução:
 
 ```bash
 uv run python praticas/encontro-05/02_estado_entre_passos.py --offline
 ```
 
-**Experimento 2 — resultado conservado.** Preveja a sequência de três decisões. Confira: consultar, abrir, responder. Compare o valor de `ultima_consulta` antes e depois da ferramenta e localize o instante em que a segunda decisão passa a poder usar a descoberta.
+Preveja novamente a sequência inteira. Desta vez, depois de `consultar_chamados`, `[ESTADO DEPOIS]` mostra `ultima_consulta` com a lista vazia. Na rodada seguinte, o mesmo resultado aparece em `[CONTEXTO ENVIADO AO MODELO]`. Só então o decisor solicita `abrir_chamado`; a ferramenta devolve `CH-001`, que também é conservado, e a última decisão responde com esse protocolo. Localize no terminal essas três decisões antes de seguir.
 
 Agora a palavra **estado** serve para nomear algo observado: é a informação que o sistema mantém durante esta execução para que uma decisão posterior possa usar o que foi descoberto antes. `estado.py` expõe essa atualização em uma função pequena. O ambiente tem os chamados reais; o estado tem o que esta execução sabe deles. Eles podem divergir.
 
-## Ato 2 — O sistema sabe mais do que o decisor precisa agora (aprox. 50–100 min)
+## O sistema sabe mais do que o decisor precisa agora
 
-Abra `estado.py`. Além da consulta, há usuário, urgência, histórico, logs e preferência de idioma. A pergunta é concreta: tudo isso precisa entrar em toda decisão?
+Guardar a consulta resolveu a repetição. Abra `estado.py` e observe que o sistema mantém também usuário, urgência, histórico, logs e preferência de idioma. Na próxima rodada, ele possui tudo isso, mas a decisão é apenas consultar ou abrir um chamado para o projetor. Que partes dessa informação você entregaria ao decisor?
+
+Para observar o extremo de enviar tudo, faça esta comparação adicional. Você também pode seguir diretamente para a versão com informação de menos e voltar a esta depois:
 
 ```bash
 uv run python praticas/encontro-05/03_contexto_demais.py --offline
+```
+
+Nessa versão, `[CONTEXTO ENVIADO AO MODELO]` reproduz o estado inteiro. A sequência ainda funciona no caso controlado. O terminal não demonstra que muita informação sempre provoca um erro. Ele mostra algo mais específico: `logs` e `preferencias` viajaram até o decisor sem ajudá-lo a escolher entre consultar, abrir ou responder. Ter informação disponível não obriga o sistema a enviá-la toda.
+
+Podemos reduzir esse envio. Antes de executar a versão seguinte, faça uma aposta: basta passar `local` e `problema`?
+
+```bash
 uv run python praticas/encontro-05/04_contexto_de_menos.py --offline
 ```
 
-**Experimento 3 — informação demais.** O recorte `demais` manda todo o estado. Compare o tamanho e a relevância dos campos com a decisão. Neste caso sintético, a ação ainda pode estar correta; a evidência é que logs e preferências foram enviados sem ajudar a decidir sobre a consulta. Não conclua que todo contexto grande necessariamente causa erro.
+Após a primeira consulta, `[ESTADO ANTES]` já contém `ultima_consulta` com `chamados: []`. Mas `[CONTEXTO ENVIADO AO MODELO]` contém apenas local e problema, e `[FICOU FORA]` lista `ultima_consulta`. O decisor repete a consulta. Agora o problema mudou de lugar: o sistema guardou o resultado, porém não o entregou nesta rodada. Compare essa falha com a primeira; as decisões se parecem, mas as evidências que explicam a repetição são diferentes.
 
-**Experimento 4 — informação de menos.** O sistema conserva a consulta, mas o recorte só entrega local e problema. Preveja a segunda decisão. Ela volta a consultar, embora `[ESTADO ANTES]` já contenha `ultima_consulta`. Localize a linha que mostra a exclusão.
-
-**Experimento 5 — comparação A/B controlada.** Rode:
+Para separar o efeito da informação de outras possíveis causas, compare A e B:
 
 ```bash
 uv run python praticas/encontro-05/05_comparacao_ab.py --offline
 ```
 
-O A e o B recebem o mesmo estado inicial, modelo, prompt base, ferramentas e objetivo. A única mudança é `montar_contexto`: A omite a consulta; B inclui a consulta vazia. A pede `consultar_chamados`; B pede `abrir_chamado`. Compare as seções `[CONTEXTO ENVIADO AO MODELO]` e `[DECISÃO]` antes de interpretar. Em modo online, a saída da LLM pode variar; o modo offline isola a variável do experimento.
+Os dois começam com o mesmo estado inicial, o mesmo objetivo, o mesmo prompt base, o mesmo decisor simulado e as mesmas ferramentas. A única diferença é o recorte produzido por `montar_contexto`: A não recebe o resultado da consulta; B recebe `chamados: []`. Antes de ler `[DECISÃO]`, preveja a escolha de cada um. A solicita `consultar_chamados`; B solicita `abrir_chamado`. A comparação usa o modo offline para isolar essa diferença; ao experimentar Gemini, as respostas podem variar.
 
 Só agora vale nomear o segundo recorte:
 
@@ -70,52 +81,62 @@ estado   = tudo que o sistema mantém nesta execução
 contexto = informação entregue ao decisor nesta rodada
 ```
 
-A conclusão nasce do A/B: **nem todo erro do agente é erro do modelo; a informação selecionada pelo sistema também muda sua decisão**. O terminal deixa visível o que ficou fora.
+A conclusão nasce das duas decisões observadas: **a informação selecionada pelo sistema também determina o comportamento do agente**. Quando a decisão parece ruim, vale olhar o que chegou ao decisor antes de culpar o modelo.
 
-**Intervenção 1.** Em `contexto.py`, corrija o modo `de_menos` para incluir o resultado da consulta. Execute os experimentos 4 e 5 novamente. Mostre o campo incluído e a ação que mudou. Reponha o defeito original se quiser repetir a demonstração com outra pessoa.
+Agora altere uma linha sua. Em `contexto.py`, faça o modo `de_menos` incluir o resultado da consulta. Rode `04_contexto_de_menos.py` novamente e compare a segunda decisão com a execução anterior. Seu registro deve mostrar qual campo entrou no contexto, qual ação mudou e por que essa mudança é suficiente. Se repetir o A/B depois da correção, A deverá passar a se comportar como B; isso também é evidência de que o recorte era a variável decisiva.
 
-## Ato 3 — Ter um dado não garante que ele esteja certo (aprox. 100–150 min)
+## A consulta guardada ainda descreve o ambiente?
 
-**Experimento 6 — dado desatualizado.** Uma consulta antiga dizia “nenhum chamado”, mas o ambiente agora contém `CH-001`:
+O CampusBot já guarda a consulta e sabe entregá-la à decisão. Isso basta enquanto o ambiente permanece igual. Agora imagine que a consulta vazia foi feita antes de outra pessoa abrir `CH-001`. O estado ainda diz “nenhum chamado”, mas essa fotografia envelheceu. O que o CampusBot fará se usar essa informação sem verificar de novo?
 
 ```bash
 uv run python praticas/encontro-05/06_informacao_desatualizada.py --offline
 ```
 
-Preveja a primeira decisão e compare estado com `[AMBIENTE]`. Ela abre `CH-002`: o estado conservou um resultado verdadeiro no passado, mas inadequado agora. Na segunda tentativa, o programa descarta a consulta antiga, consulta de novo e encontra `CH-001`. A correção específica aqui é verificar o ambiente antes de abrir; não precisamos de uma política geral de validade temporal.
+Na primeira trajetória, `[ESTADO ANTES]` traz a consulta vazia. A decisão pede `abrir_chamado`, e `[AMBIENTE]` passa a mostrar `CH-001` e `CH-002` no mesmo local. O resultado antigo foi preservado e entregue corretamente; faltou perguntar se ele ainda servia para esta decisão. A segunda trajetória começa novamente com o ambiente contendo apenas `CH-001`, descarta a consulta antiga e consulta de novo. Agora a resposta reconhece o chamado existente.
 
-**Experimento 7 — dado conflitante.** O estado diz `Lab 4`; uma nova percepção corrige para `Lab 5`, onde `CH-001` já existe:
+> Que evidência permite distinguir “o agente esqueceu” de “o agente lembrou uma informação antiga”?
+
+Na primeira falha do encontro, `ultima_consulta` estava vazia. Aqui ela está preenchida, mas diverge do ambiente atual. Para este caso, uma nova consulta antes de abrir evita a duplicação. Não precisamos formular uma regra geral de validade para toda informação.
+
+Há outra forma de a informação disponível induzir uma decisão ruim: duas indicações do mesmo dado discordam. O estado diz `Lab 4`, mas a pessoa corrige: “Na verdade, é no Lab 5.” Lá já existe `CH-001`. Antes de executar, preveja o que acontecerá se o programa continuar usando o local antigo.
 
 ```bash
 uv run python praticas/encontro-05/07_informacao_conflitante.py --offline
 ```
 
-Primeiro, a correção fica fora do estado e o CampusBot consulta e abre no Lab 4. Depois, o local do estado é atualizado para Lab 5 e o agente encontra o chamado existente. Qual linha mostra que a escolha foi feita antes da chamada ao modelo? A atividade não pretende resolver conflitos em geral; ela mostra que montar informação para a decisão é uma escolha de engenharia.
+O script mostra a nova percepção nas duas trajetórias. Na primeira, `estado.local` continua `Lab 4`: o CampusBot consulta esse local e abre um chamado ali. Na segunda, o programa atualiza `estado.local` para `Lab 5` antes de montar o contexto. A consulta encontra `CH-001`, e o agente responde sem abrir outro. Compare `[NOVA PERCEPÇÃO]`, `[ESTADO ANTES]` e `[CONTEXTO ENVIADO AO MODELO]` para localizar o momento da escolha. A experiência não resolve conflitos em geral; ela mostra uma escolha concreta de engenharia sobre qual informação orientar a decisão.
 
-**Extensão pronta, se houver tempo:** em `estado.py`, acrescente uma segunda observação de local; execute com a antiga e a nova em ordens opostas. Explique qual valor `montar_contexto` entrega. Outra extensão é remover apenas `problema` do recorte e observar a validação da decisão; depois restaurá-lo. Essas variações aprofundam o mesmo problema, sem abrir tema novo.
+Uma variação do mesmo caso é retirar `ultima_abertura` do recorte em `contexto.py` e rodar `02_estado_entre_passos.py`. Preveja a decisão posterior à abertura, observe-a e restaure o campo depois. A ferramenta abriu o chamado; descubra por que a resposta final não acompanha essa mudança.
 
-## Ato 4 — A execução terminou. O que restou? (aprox. 150–200 min)
+## O programa terminou. Qual era o protocolo?
 
-O estado anterior desaparece quando o processo Python acaba. Faça duas sessões separadas com um arquivo JSON escolhido por você:
+Depois de abrir `CH-001`, encerre o programa. Abra uma nova execução e pergunte: “Qual era o protocolo do projetor do Lab 4?” `ultima_abertura` pertencia ao estado da execução anterior; um novo processo Python começa com outro estado. Antes de rodar os comandos, preveja o que a nova execução responderá sem ler nada que tenha sido gravado.
+
+Use o mesmo caminho de arquivo nos dois comandos abaixo. Eles iniciam **processos diferentes**:
 
 ```bash
 uv run python praticas/encontro-05/08_memoria_entre_execucoes.py --fase gravar --arquivo /tmp/campusbot-encontro-05.json --offline
 uv run python praticas/encontro-05/08_memoria_entre_execucoes.py --fase recuperar --arquivo /tmp/campusbot-encontro-05.json --offline
 ```
 
-**Experimento 8 — duas execuções.** Antes de recuperar, a nova execução diz que não sabe o protocolo. Depois de `recuperar_memoria`, responde `CH-001`. Compare `[NOVA EXECUÇÃO — ESTADO INICIAL]` com `[MEMÓRIA RECUPERADA]`. O estado novo não herdou os objetos do processo anterior; o JSON sobreviveu. Se rodar `recuperar` antes de `gravar`, o arquivo pode não existir e a resposta continuará desconhecida.
+O primeiro processo abre o chamado e grava um pequeno JSON. O segundo mostra `[NOVA EXECUÇÃO — ESTADO INICIAL]`: ali não há protocolo. Por isso, `[SEM MEMÓRIA]` responde que não sabe. Depois de `recuperar_memoria`, `[MEMÓRIA RECUPERADA]` mostra `CH-001`, e `[COM MEMÓRIA]` pode citar o protocolo. A diferença entre as duas respostas tem uma origem verificável: o arquivo foi lido entre elas. Se executar a fase `recuperar` antes de gravar o arquivo, a resposta continuará desconhecida.
 
-Neste encontro, **memória** é simplesmente informação que pode sobreviver a uma execução. `memoria.py` contém `salvar_memoria` e `recuperar_memoria`. Persistir o protocolo não prova que seu status continuará atual.
+Agora a palavra **memória** tem uma necessidade concreta: alguma informação precisa sobreviver além da execução que a descobriu. Aqui ela é apenas um arquivo JSON lido e gravado por `memoria.py`. A persistência resolve a pergunta pelo protocolo, mas cria uma nova dúvida: o arquivo sabe se o chamado continua aberto?
+
+Imagine que o JSON diga `CH-001: aberto` e que, desde então, o chamado tenha sido encerrado. Preveja as duas respostas que o próximo comando mostrará: a primeira baseada na lembrança, a segunda depois de consultar o ambiente atual.
 
 ```bash
 uv run python praticas/encontro-05/09_memoria_desatualizada.py --offline
 ```
 
-**Experimento 9 — lembrança antiga.** O JSON diz que `CH-001` está aberto. O ambiente atual diz que ele foi encerrado. A primeira resposta repete o status antigo. Depois, uma consulta atual corrige a informação usada na resposta. Preveja as duas respostas e aponte a linha que sustenta cada uma. **Intervenção 2:** em `atividade_autonoma.py`, caso `memoria`, implemente apenas a conferência no ambiente antes de afirmar o status. Mostre a resposta corrigida. Esquecer pode atrapalhar; lembrar dado velho também.
+Compare `[MEMÓRIA]` com `[AMBIENTE ATUAL]`. A primeira resposta repete “aberto”; a segunda diz “encerrado” depois da consulta. O protocolo lembrado ainda identifica o chamado, mas seu status antigo já não descreve o presente. Esquecer pode atrapalhar; lembrar um dado velho também.
 
-### Núcleo e extensões
+Faça você uma intervenção pequena. No caso `memoria` de `atividade_autonoma.py`, a resposta inicial usa apenas a lembrança. Acrescente uma consulta ao ambiente antes de afirmar o status e mostre a resposta corrigida. Seu objetivo é resolver **este** desacordo observável, sem criar uma política geral de atualização.
 
-O **núcleo** é a sequência 1, 2, 4, 5, 6, 7, 8 e 9, com as duas intervenções. O experimento 3 é uma extensão curta sobre excesso de informação; as variações de local e de campo removido são extensões para uma turma que avance rápido. A distribuição de tempos é uma referência para conduzir previsão, execução, conversa em pares e correção, não um cronograma rígido.
+### Para aprofundar a mesma investigação
+
+Se ainda não executou a versão que envia o estado inteiro, faça isso agora e identifique quais campos não participaram da decisão. Depois compare com a variação que retira `ultima_abertura`: nesse caso, uma informação necessária ficou fora. As duas modificações aprofundam a mesma pergunta sobre a seleção do que chega ao decisor.
 
 ## Trabalho autônomo orientado
 
@@ -127,7 +148,7 @@ uv run python praticas/encontro-05/atividade_autonoma.py contexto --offline
 uv run python praticas/encontro-05/atividade_autonoma.py memoria --offline
 ```
 
-Em cada caso, identifique se o defeito principal está no estado, no contexto ou na memória; cite uma linha da execução; faça a menor correção; execute outra vez; explique por que o comportamento mudou. No caso `estado`, ative a preservação do resultado. No caso `contexto`, inclua a consulta já guardada no recorte. No caso `memoria`, confira o status no ambiente antes da resposta. O arquivo `praticas/encontro-05/README.md` indica os arquivos de cada responsabilidade. A atividade é formativa e sem nota por padrão; sua produção será útil para a retomada do próximo encontro.
+Em cada caso, identifique se o defeito principal está no estado, no contexto ou na memória. Cite uma linha da execução que sustente o diagnóstico, faça a menor correção, execute outra vez e explique a mudança de comportamento. Se já corrigiu o recorte em `contexto.py`, use a saída anterior e a posterior à sua intervenção como as duas evidências do caso `contexto`; não é preciso recriar o defeito. O arquivo `praticas/encontro-05/README.md` indica os arquivos de cada responsabilidade. A atividade é formativa e sem nota por padrão; sua produção será útil para a retomada do próximo encontro.
 
 ## Síntese e próximo problema
 
