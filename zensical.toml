@@ -11,6 +11,7 @@ nav = [
     { "02 — Quando tornar um sistema agentivo?" = "encontros/encontro-02-quando-vale-a-pena-tornar-um-sistema-agentivo.md" },
     { "03 — Do que é feito um agente baseado em LLM?" = "encontros/encontro-03-do-que-e-feito-um-agente-baseado-em-llm.md" },
     { "04 — Como um agente passa de responder para agir?" = "encontros/encontro-04-como-um-agente-passa-de-responder-para-agir.md" },
+    { "05 — O que o agente precisa saber agora?" = "encontros/encontro-05-o-que-o-agente-precisa-saber-agora.md" },
   ] },
   { "Desafios" = "desafios/index.md" },
   { "Projeto" = "projeto/index.md" },

@@ -10,3 +10,4 @@ Cada encontro terá uma página permanente no formato `encontro-XX-assunto`, sem
 2. [Quando vale a pena tornar um sistema agentivo?](encontro-02-quando-vale-a-pena-tornar-um-sistema-agentivo.md)
 3. [Do que é feito um agente baseado em LLM?](encontro-03-do-que-e-feito-um-agente-baseado-em-llm.md)
 4. [Como um agente passa de responder para agir?](encontro-04-como-um-agente-passa-de-responder-para-agir.md)
+5. [O que o agente precisa saber agora — e o que precisa lembrar depois?](encontro-05-o-que-o-agente-precisa-saber-agora.md)
