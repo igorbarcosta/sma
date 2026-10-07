@@ -4,9 +4,9 @@ Neste encontro, retomaremos os conceitos de agente, ferramentas, ciclo de execu�
 
 ## 1. Revisão: construir e observar um agente
 
-Usaremos o notebook [Nosso primeiro agente com LangChain](https://github.com/igorbarcosta/sma/blob/draft/praticas/encontro-06/sma_primeiro_agente_langchain_revisado.ipynb), disponível no repositório em `praticas/encontro-06/sma_primeiro_agente_langchain_revisado.ipynb`.
+Abra o notebook [Nosso primeiro agente com LangChain no Google Colab](https://colab.research.google.com/drive/1mT_AgE2NKYTz1BtEupdWEVWAF6Y3r7mh). O acesso está disponível somente com o e-mail institucional do IFPB. Antes de começar, faça sua própria cópia em **Arquivo → Salvar uma cópia no Drive** e trabalhe nela.
 
-Abra o notebook no Google Colab usando **Arquivo → Fazer upload de notebook**. Na preparação, configure sua própria `GEMINI_API_KEY` no painel **Secrets** e permita o acesso pelo notebook. Execute as células na ordem indicada; as instruções de instalação e configuração estão no próprio documento.
+Na preparação, configure sua própria `GEMINI_API_KEY` no painel **Secrets** e permita o acesso pelo notebook. Execute as células na ordem indicada; as instruções de instalação e configuração estão no próprio documento.
 
 A construção parte de um agente sem ferramentas e acrescenta abertura e consulta de chamados, observação da trajetória e memória de curto prazo. Antes das execuções sinalizadas no notebook, faça uma previsão; depois, compare-a com as mensagens e com o estado do ambiente.
 
