@@ -11,3 +11,4 @@ Cada encontro terá uma página permanente no formato `encontro-XX-assunto`, sem
 3. [Do que é feito um agente baseado em LLM?](encontro-03-do-que-e-feito-um-agente-baseado-em-llm.md)
 4. [Como um agente passa de responder para agir?](encontro-04-como-um-agente-passa-de-responder-para-agir.md)
 5. [O que o agente precisa saber agora — e o que precisa lembrar depois?](encontro-05-o-que-o-agente-precisa-saber-agora.md)
+6. [Revisão com LangChain e discussão dos projetos](encontro-06-revisao-com-langchain-e-discussao-dos-projetos.md)
